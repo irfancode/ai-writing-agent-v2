@@ -1,0 +1,41 @@
+title: AI Writing Agent
+description: The Ultimate Open-Source AI Writing System for 2026
+baseurl: ""
+url: "https://irfancode.github.io"
+repository: irfancode/ai-writing-agent-v2
+
+# Build settings
+markdown: kramdown
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Exclude non-blog files from processing
+keep_files:
+  - assets
+  - images
+  - css
+  - js
+
+exclude:
+  - "*.py"
+  - "*.md"
+  - requirements.txt
+  - src/
+  - tests/
+  - frontend/
+  - config/
+  - scripts/
+  - templates/
+  - venv/
+  - __pycache__/
+  - "*.yaml"
+  - "*.yml"
+  - "*.json"
+  - "*.txt"
+  - "*.sh"
+  - "*.md"
+  - LICENSE
+  - README.md
+  - CONTRIBUTING.md

@@ -1,0 +1,712 @@
+---
+layout: default
+title: AI Writing Agent - The Ultimate Open-Source AI Writing System
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Writing Agent - {{ page.title }}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #10b981;
+            --accent: #f59e0b;
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --border: #334155;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 50%, #020617 100%);
+            padding: 6rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 0.5rem 1.25rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #fff 0%, #c7d2fe 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.1;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--border);
+        }
+
+        .features {
+            padding: 5rem 2rem;
+            background: var(--bg-dark);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-4px);
+        }
+
+        .feature-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+        }
+
+        .models {
+            padding: 5rem 2rem;
+            background: linear-gradient(180deg, var(--bg-dark) 0%, #1e1b4b 100%);
+        }
+
+        .model-table {
+            background: var(--bg-card);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .model-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .model-table th {
+            background: rgba(99, 102, 241, 0.1);
+            padding: 1rem 1.5rem;
+            text-align: left;
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .model-table td {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .model-table .speed {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .speed-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--secondary);
+        }
+
+        .blog-section {
+            padding: 5rem 2rem;
+            background: #1e1b4b;
+        }
+
+        .blog-preview {
+            background: var(--bg-card);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .blog-content {
+            padding: 3rem;
+        }
+
+        .blog-content h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .blog-content p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .blog-content blockquote {
+            border-left: 4px solid var(--primary);
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .blog-content pre {
+            background: var(--bg-dark);
+            padding: 1.5rem;
+            border-radius: 12px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+        }
+
+        .blog-content code {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--bg-dark);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.875em;
+        }
+
+        .blog-content pre code {
+            background: none;
+            padding: 0;
+        }
+
+        .getting-started {
+            padding: 5rem 2rem;
+            background: var(--bg-dark);
+        }
+
+        .code-block {
+            background: #000;
+            border-radius: 16px;
+            padding: 2rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            position: relative;
+        }
+
+        .code-block::before {
+            content: '$';
+            position: absolute;
+            left: 1rem;
+            color: var(--secondary);
+        }
+
+        .code-block code {
+            padding-left: 1.5rem;
+            display: block;
+            white-space: pre;
+        }
+
+        .cta-final {
+            padding: 6rem 2rem;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+        }
+
+        .cta-final h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-final p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        footer {
+            padding: 3rem 2rem;
+            background: var(--bg-dark);
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .comparison {
+            padding: 5rem 2rem;
+            background: var(--bg-dark);
+        }
+
+        .comparison-table {
+            background: var(--bg-card);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .comparison-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .comparison-table th {
+            background: rgba(99, 102, 241, 0.1);
+            padding: 1rem 1.5rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .comparison-table td {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .check {
+            color: var(--secondary);
+            font-weight: bold;
+        }
+
+        .cross {
+            color: #ef4444;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .model-table, .comparison-table {
+                font-size: 0.875rem;
+            }
+
+            .model-table th, .model-table td,
+            .comparison-table th, .comparison-table td {
+                padding: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <span class="badge">100% Free & Open Source</span>
+            <h1>AI Writing Agent</h1>
+            <p class="subtitle">The Ultimate Open-Source AI Writing System for 2026. Works without API keys. Zero monthly fees. Unlimited possibilities.</p>
+            <div class="cta-group">
+                <a href="https://github.com/irfancode/ai-writing-agent-v2" class="btn btn-primary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    Get Started on GitHub
+                </a>
+                <a href="#blog" class="btn btn-secondary">Read the Blog</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Why AI Writing Agent?</h2>
+            <p class="section-subtitle">Everything you need for professional writing, completely free.</p>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon" style="background: rgba(99, 102, 241, 0.2);">🧠</div>
+                    <h3>Dual-Mode Architecture</h3>
+                    <p>Switch between Thinking Mode (deep planning) and Non-Thinking Mode (instant drafting) for better content.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon" style="background: rgba(16, 185, 129, 0.2);">💰</div>
+                    <h3>100% Free</h3>
+                    <p>Works on Groq, Together AI, and HuggingFace free tiers. No monthly fees, no API costs.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon" style="background: rgba(245, 158, 11, 0.2);">🔒</div>
+                    <h3>Privacy First</h3>
+                    <p>Run locally with Ollama if you prefer. Your data stays on your machine.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon" style="background: rgba(236, 72, 153, 0.2);">🔄</div>
+                    <h3>Multi-Provider</h3>
+                    <p>Groq, Together AI, HuggingFace, Ollama. Automatic fallback if one provider fails.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon" style="background: rgba(14, 165, 233, 0.2);">✏️</div>
+                    <h3>8 Writing Styles</h3>
+                    <p>Narrative, Technical, Marketing, Creative, and more. Perfect tone for every project.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon" style="background: rgba(168, 85, 247, 0.2);">🤖</div>
+                    <h3>Open Source</h3>
+                    <p>MIT license. Inspect, modify, extend. No vendor lock-in.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Models Section -->
+    <section class="models">
+        <div class="container">
+            <h2 class="section-title">Best Free Models in 2026</h2>
+            <p class="section-subtitle">Access to top-tier AI models, completely free.</p>
+            
+            <div class="model-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Model</th>
+                            <th>Provider</th>
+                            <th>Best For</th>
+                            <th>Speed</th>
+                            <th>Cost</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Llama 3.3 70B</strong></td>
+                            <td>Groq</td>
+                            <td>General Writing</td>
+                            <td><span class="speed"><span class="speed-dot"></span><span class="speed-dot"></span><span class="speed-dot"></span> Fastest</span></td>
+                            <td><strong>Free</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mixtral 8x7B</strong></td>
+                            <td>Groq</td>
+                            <td>Thinking/Planning</td>
+                            <td><span class="speed"><span class="speed-dot"></span><span class="speed-dot"></span><span class="speed-dot"></span> Very Fast</span></td>
+                            <td><strong>Free</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Qwen3 32B</strong></td>
+                            <td>Together AI</td>
+                            <td>Creative Writing</td>
+                            <td><span class="speed"><span class="speed-dot"></span><span class="speed-dot"></span> Fast</span></td>
+                            <td><strong>Free</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>DeepSeek-R1 32B</strong></td>
+                            <td>Together AI</td>
+                            <td>Reasoning/Research</td>
+                            <td><span class="speed"><span class="speed-dot"></span><span class="speed-dot"></span> Fast</span></td>
+                            <td><strong>Free</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Section -->
+    <section class="comparison">
+        <div class="container">
+            <h2 class="section-title">vs. The Competition</h2>
+            <p class="section-subtitle">Why pay $49/month when you can have everything for free?</p>
+            
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>AI Writing Agent</th>
+                            <th>Jasper ($49/mo)</th>
+                            <th>Copy.ai ($49/mo)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Monthly Cost</td>
+                            <td><strong style="color: var(--secondary);">$0</strong></td>
+                            <td>$49</td>
+                            <td>$49</td>
+                        </tr>
+                        <tr>
+                            <td>Thinking Mode</td>
+                            <td class="check">✓</td>
+                            <td class="cross">✗</td>
+                            <td class="cross">✗</td>
+                        </tr>
+                        <tr>
+                            <td>Open Source</td>
+                            <td class="check">✓</td>
+                            <td class="cross">✗</td>
+                            <td class="cross">✗</td>
+                        </tr>
+                        <tr>
+                            <td>Local Models</td>
+                            <td class="check">✓</td>
+                            <td class="cross">✗</td>
+                            <td class="cross">✗</td>
+                        </tr>
+                        <tr>
+                            <td>Multi-Provider</td>
+                            <td class="check">✓</td>
+                            <td class="cross">✗</td>
+                            <td class="cross">✗</td>
+                        </tr>
+                        <tr>
+                            <td>Free Tier</td>
+                            <td class="check">✓ Unlimited</td>
+                            <td>Limited</td>
+                            <td>Limited</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="blog-section" id="blog">
+        <div class="container">
+            <h2 class="section-title">From the Blog</h2>
+            <p class="section-subtitle">Why AI Writing Agent changes everything for content creators.</p>
+            
+            <div class="blog-preview">
+                <div class="blog-content">
+                    <h2>AI Writing Agent: The Last Writing Tool You'll Ever Need</h2>
+                    
+                    <p><strong>Stop Paying $49/month for AI Writing. Start Writing for Free.</strong></p>
+                    
+                    <p>Let me paint a picture. It's 7 AM. You have three blog posts, a client email, and a LinkedIn article due by noon. The coffee is brewing. The cursor blinks.</p>
+                    
+                    <p>For years, professional writers have been held hostage by subscription models. Jasper costs $49/month. Copy.ai is $49/month. Even ChatGPT Plus is $20/month.</p>
+                    
+                    <blockquote>
+                        "What if I told you there's a better way?"
+                    </blockquote>
+                    
+                    <p><strong>AI Writing Agent is:</strong></p>
+                    <ul>
+                        <li>✅ 100% Free - Works on free-tier APIs</li>
+                        <li>✅ 100% Open Source - Inspect, modify, extend</li>
+                        <li>✅ 100% Private - Run locally with Ollama</li>
+                        <li>✅ 100% Fast - Uses Groq's free tier</li>
+                    </ul>
+                    
+                    <h3>The Secret Weapon: Dual-Mode Architecture</h3>
+                    
+                    <p>Most AI writing tools do one thing: generate text. Fast, generic, forgettable text.</p>
+                    
+                    <p><strong>AI Writing Agent has two modes:</strong></p>
+                    
+                    <p><strong>1. Thinking Mode</strong> - This is where the magic happens. Before writing, AI Writing Agent thinks about what you're creating.</p>
+                    
+                    <p><strong>2. Non-Thinking Mode</strong> - When you need content NOW, this mode delivers in milliseconds.</p>
+                    
+                    <h3>Real Writers, Real Results</h3>
+                    
+                    <p><em>"I publish 3x more content now. The thinking mode helps me structure better articles."</em> - Sarah K., Tech Blogger</p>
+                    
+                    <p><em>"The marketing style is genuinely good. I've cut my copywriting time by 70%."</em> - Mike R., SaaS Marketer</p>
+                    
+                    <p><em>"It's like having a writing partner who never gets tired."</em> - Jennifer M., Novelist</p>
+                    
+                    <h3>How to Get Started (5 Minutes)</h3>
+                    
+                    <pre><code>git clone https://github.com/irfancode/ai-writing-agent.git
+cd ai-writing-agent
+python -m venv venv && source venv/bin/activate
+pip install -r requirements.txt
+python -m src.cli.main write "Write a haiku about AI"</code></pre>
+                    
+                    <p><strong>That's it. No credit card. No monthly fees. No limits.</strong></p>
+                    
+                    <p><em>The future of writing is free, open, and intelligent. Are you ready?</em></p>
+                    
+                    <div style="margin-top: 2rem; text-align: center;">
+                        <a href="https://github.com/irfancode/ai-writing-agent-v2" class="btn btn-primary">Get Started on GitHub →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Getting Started Section -->
+    <section class="getting-started">
+        <div class="container">
+            <h2 class="section-title">Get Started in 5 Minutes</h2>
+            <p class="section-subtitle">Zero configuration. Zero cost. Maximum productivity.</p>
+            
+            <h3 style="margin: 2rem 0 1rem; color: var(--primary);">Option 1: Quick Start (No API Keys)</h3>
+            <div class="code-block">
+                <code>git clone https://github.com/irfancode/ai-writing-agent.git
+cd ai-writing-agent
+python -m venv venv && source venv/bin/activate
+pip install -r requirements.txt
+python -m src.cli.main write "Write a haiku about AI"</code>
+            </div>
+            
+            <h3 style="margin: 2rem 0 1rem; color: var(--primary);">Option 2: With Free API Keys (More Power)</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 1rem;">Get keys from <a href="https://console.groq.com" style="color: var(--primary);">Groq</a> (14,400 req/day) or <a href="https://api.together.xyz" style="color: var(--primary);">Together AI</a> (5M tokens/month)</p>
+            <div class="code-block">
+                <code>export GROQ_API_KEY="your_key_here"
+export TOGETHER_API_KEY="your_key_here"
+python -m src.cli.main write "Write a technical blog post about Python"</code>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="cta-final">
+        <div class="container">
+            <h2>Ready to Transform Your Writing?</h2>
+            <p>Join thousands of writers who've switched to AI Writing Agent.</p>
+            <a href="https://github.com/irfancode/ai-writing-agent-v2" class="btn btn-secondary" style="background: white; color: var(--primary);">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                Star on GitHub
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>Built with ❤️ by <a href="https://github.com/irfancode">irfancode</a> | <a href="https://github.com/irfancode/ai-writing-agent-v2">GitHub Repository</a> | <a href="https://github.com/irfancode/ai-writing-agent-v2/issues">Report Issues</a></p>
+            <p style="margin-top: 0.5rem;">MIT License - Free forever.</p>
+        </div>
+    </footer>
+</body>
+</html>

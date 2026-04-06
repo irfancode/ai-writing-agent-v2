@@ -11,10 +11,17 @@
 [![vLLM](https://img.shields.io/badge/vLLM-Optimized-green.svg)](https://docs.vllm.ai)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Stars](https://img.shields.io/github/stars/irfancode/ai-writing-agent?style=social)](https://github.com/irfancode/ai-writing-agent)
+[![Pages](https://img.shields.io/badge/GitHub%20Pages-Live-blue.svg)](https://irfancode.github.io)
 
 **Dual-Mode | Multi-Agent | High-Context | Open-Source | Zero-Cost**
 
 </div>
+
+---
+
+## 🌐 Live Demo
+
+**Visit our website:** https://irfancode.github.io
 
 ---
 
