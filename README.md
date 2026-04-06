@@ -10,7 +10,7 @@
 [![Vue.js](https://img.shields.io/badge/Vue.js-3.x-42b883.svg)](https://vuejs.org)
 [![vLLM](https://img.shields.io/badge/vLLM-Optimized-green.svg)](https://docs.vllm.ai)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Stars](https://img.shields.io/github/stars/irfancode/ai-writing-agent?style=social)](https://github.com/irfancode/ai-writing-agent)
+[![Stars](https://img.shields.io/github/stars/irfancode/ai-writing-agent?style=social)](https://github.com/irfancode/ai-writing-agent-v2
 [![Pages](https://img.shields.io/badge/GitHub%20Pages-Live-blue.svg)](https://irfancode.github.io)
 
 **Dual-Mode | Multi-Agent | High-Context | Open-Source | Zero-Cost**
@@ -130,7 +130,7 @@ curl -fsSL https://ollama.com/install.sh | sh  # Linux
 ollama pull llama3.3
 
 # Clone and run
-git clone https://github.com/irfancode/ai-writing-agent.git
+git clone https://github.com/irfancode/ai-writing-agent-v2git
 cd ai-writing-agent
 python -m venv venv && source venv/bin/activate
 pip install -r requirements.txt
@@ -159,7 +159,7 @@ export TOGETHER_API_KEY="..."
 ### Full Installation
 
 ```bash
-git clone https://github.com/irfancode/ai-writing-agent.git
+git clone https://github.com/irfancode/ai-writing-agent-v2git
 cd ai-writing-agent
 
 # Python 3.10+

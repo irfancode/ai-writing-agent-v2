@@ -53,7 +53,7 @@ AI Writing Agent is an **open-source, zero-cost** AI writing system that combine
 ### Option 1: Zero-Config (No API Keys)
 
 ```bash
-git clone https://github.com/irfancode/ai-writing-agent.git
+git clone https://github.com/irfancode/ai-writing-agent-v2git
 cd ai-writing-agent
 python -m venv venv && source venv/bin/activate
 pip install -r requirements.txt
@@ -197,9 +197,9 @@ MIT License - See [LICENSE](../LICENSE)
 
 ## Support
 
-- 📋 [GitHub Issues](https://github.com/irfancode/ai-writing-agent/issues)
-- 💬 [Discussions](https://github.com/irfancode/ai-writing-agent/discussions)
-- 📖 [Wiki](https://github.com/irfancode/ai-writing-agent/wiki)
+- 📋 [GitHub Issues](https://github.com/irfancode/ai-writing-agent-v2/issues)
+- 💬 [Discussions](https://github.com/irfancode/ai-writing-agent-v2/discussions)
+- 📖 [Wiki](https://github.com/irfancode/ai-writing-agent-v2/wiki)
 
 ---
 
@@ -207,6 +207,6 @@ MIT License - See [LICENSE](../LICENSE)
 
 **Made with ❤️ for writers everywhere**
 
-[Star on GitHub](https://github.com/irfancode/ai-writing-agent) | [Get Started](USER_GUIDE.md#quick-start)
+[Star on GitHub](https://github.com/irfancode/ai-writing-agent-v2 | [Get Started](USER_GUIDE.md#quick-start)
 
 </div>

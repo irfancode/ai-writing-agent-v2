@@ -25,7 +25,7 @@
 
 ```bash
 # Clone the repository
-git clone https://github.com/irfancode/ai-writing-agent.git
+git clone https://github.com/irfancode/ai-writing-agent-v2git
 cd ai-writing-agent
 
 # Create virtual environment
@@ -86,7 +86,7 @@ node --version
 
 ```bash
 # 1. Clone repository
-git clone https://github.com/irfancode/ai-writing-agent.git
+git clone https://github.com/irfancode/ai-writing-agent-v2git
 cd ai-writing-agent
 
 # 2. Create virtual environment
@@ -734,9 +734,9 @@ registry.register_provider("my_provider", custom_provider)
 
 ## Support
 
-- **GitHub Issues:** https://github.com/irfancode/ai-writing-agent/issues
-- **Documentation:** https://github.com/irfancode/ai-writing-agent#readme
-- **Discussions:** https://github.com/irfancode/ai-writing-agent/discussions
+- **GitHub Issues:** https://github.com/irfancode/ai-writing-agent-v2/issues
+- **Documentation:** https://github.com/irfancode/ai-writing-agent-v2readme
+- **Discussions:** https://github.com/irfancode/ai-writing-agent-v2/discussions
 
 ---
 
