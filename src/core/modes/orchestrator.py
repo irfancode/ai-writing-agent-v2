@@ -156,6 +156,11 @@ class DualModeOrchestrator:
         
         Uses speed-optimized models like MiMo-V2.
         """
+        if not model:
+            best_model = self.registry.get_best_model(mode=ModelMode.NON_THINKING)
+            if best_model:
+                model = best_model
+        
         request = DraftRequest(
             content=prompt,
             task="draft",

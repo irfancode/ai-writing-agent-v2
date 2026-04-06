@@ -301,21 +301,35 @@ def get_registry() -> ModelRegistry:
 
 
 def init_registry(config: Optional[Dict] = None) -> ModelRegistry:
-    """Initialize registry with remote API providers only - no local Ollama"""
+    """Initialize registry with providers - falls back to mock if no API keys"""
     registry = get_registry()
     
     if registry._providers:
         return registry
     
     from .free import FreeProvider
+    from .mock import MockProvider
     from .huggingface import HuggingFaceProvider
     
-    free_provider = FreeProvider()
-    registry.register_provider("free", free_provider, ProviderConfig(
-        provider_type=ProviderType.OPENAI,
-        enabled=True,
-        priority=100,
-    ))
+    groq_key = os.getenv("GROQ_API_KEY")
+    together_key = os.getenv("TOGETHER_API_KEY")
+    
+    has_api_keys = bool(groq_key or together_key)
+    
+    if has_api_keys:
+        free_provider = FreeProvider()
+        registry.register_provider("free", free_provider, ProviderConfig(
+            provider_type=ProviderType.OPENAI,
+            enabled=True,
+            priority=100,
+        ))
+    else:
+        mock_provider = MockProvider()
+        registry.register_provider("mock", mock_provider, ProviderConfig(
+            provider_type=ProviderType.OPENAI,
+            enabled=True,
+            priority=100,
+        ))
     
     hf_api_key = os.getenv("HF_API_KEY")
     if hf_api_key:
