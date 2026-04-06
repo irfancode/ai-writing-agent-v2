@@ -59,7 +59,10 @@ class CLI:
         available = [k for k, v in health.items() if v]
         
         if available:
-            print_success(f"Connected to: {', '.join(available)}")
+            if "mock" in available:
+                print_success(f"Ready! (Demo mode - for real AI, set GROQ_API_KEY)")
+            else:
+                print_success(f"Connected to: {', '.join(available)}")
         else:
             print_error("No providers available. Check your configuration.")
     

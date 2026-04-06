@@ -79,10 +79,14 @@ class NonThinkingMode:
     def __init__(
         self,
         registry: ModelRegistry,
-        default_model: str = "groq/llama-3.1-8b-instant",
+        default_model: str = None,
     ):
         self.registry = registry
-        self.default_model = default_model
+        if default_model is None:
+            best = registry.get_best_model(mode=ModelMode.NON_THINKING)
+            self.default_model = best or "mock/llama-3.3-70b"
+        else:
+            self.default_model = default_model
         self.edit_history: List[EditResult] = []
     
     async def draft(
