@@ -112,7 +112,8 @@ class ModelRegistry:
     def get_best_model(
         self,
         mode: ModelMode = ModelMode.ANY,
-        speed_preference: str = "balanced",  # "fast", "balanced", "quality"
+        speed_preference: str = "balanced",
+        api_key_available: bool = False,
     ) -> Optional[str]:
         """
         Get the best available model for a mode.
@@ -120,13 +121,13 @@ class ModelRegistry:
         Args:
             mode: The writing mode
             speed_preference: "fast", "balanced", or "quality"
+            api_key_available: Whether an API key is available (prefer paid if so)
         """
         candidates = self._mode_routing.get(mode, []) + self._mode_routing.get(ModelMode.ANY, [])
         
         if not candidates:
             return None
         
-        # Score and sort candidates
         scored = []
         for model_id in set(candidates):
             config = self.get_model_config(model_id)
@@ -135,17 +136,24 @@ class ModelRegistry:
             
             score = 0
             
-            # Mode match bonus
+            api_key_required = config.metadata.get("api_key_required", False)
+            if not api_key_available and api_key_required:
+                continue
+            
+            if api_key_required and api_key_available:
+                score += 30
+            
             if config.mode == mode:
                 score += 100
             
-            # Speed preference
             if speed_preference == "fast" and "fast" in config.capabilities:
                 score += 50
             elif speed_preference == "quality" and "reasoning" in config.capabilities:
                 score += 50
             
-            # Context window (prefer larger)
+            if config.metadata.get("free"):
+                score += 20
+            
             score += config.context_window / 1000000
             
             scored.append((score, model_id))
@@ -155,7 +163,7 @@ class ModelRegistry:
         if scored:
             return scored[0][1]
         
-        return candidates[0] if candidates else None
+        return None
     
     async def generate(
         self,
@@ -293,28 +301,37 @@ def get_registry() -> ModelRegistry:
 
 
 def init_registry(config: Optional[Dict] = None) -> ModelRegistry:
-    """Initialize registry with configuration"""
+    """Initialize registry with configuration - ZERO COST by default"""
     registry = get_registry()
     
-    # Import and register providers
-    from .huggingface import HuggingFaceProvider
+    if registry._providers:
+        return registry
+    
+    from .free import FreeProvider
     from .ollama import OllamaProvider
-    from .vllm import VLLMProvider
+    from .huggingface import HuggingFaceProvider
     
-    # Register HuggingFace
-    hf_api_key = os.getenv("HF_API_KEY")
-    if hf_api_key or os.getenv("HF_API_KEY"):
-        hf_provider = HuggingFaceProvider(api_key=hf_api_key)
-        registry.register_provider("huggingface", hf_provider)
+    free_provider = FreeProvider()
+    registry.register_provider("free", free_provider, ProviderConfig(
+        provider_type=ProviderType.OPENAI,
+        enabled=True,
+        priority=100,
+    ))
     
-    # Register Ollama
     ollama_provider = OllamaProvider()
-    registry.register_provider("ollama", ollama_provider)
+    registry.register_provider("ollama", ollama_provider, ProviderConfig(
+        provider_type=ProviderType.OLLAMA,
+        enabled=True,
+        priority=50,
+    ))
     
-    # Register vLLM if configured
-    vllm_url = os.getenv("VLLM_URL")
-    if vllm_url:
-        vllm_provider = VLLMProvider(base_url=vllm_url)
-        registry.register_provider("vllm", vllm_provider)
+    hf_api_key = os.getenv("HF_API_KEY")
+    if hf_api_key:
+        hf_provider = HuggingFaceProvider(api_key=hf_api_key)
+        registry.register_provider("huggingface", hf_provider, ProviderConfig(
+            provider_type=ProviderType.HUGGINGFACE,
+            enabled=True,
+            priority=30,
+        ))
     
     return registry

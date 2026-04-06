@@ -1,23 +1,45 @@
 # AI Writing Agent Configuration
 
 providers:
-  huggingface:
+  # ZERO COST PROVIDERS (work without API keys)
+  free:
     enabled: true
-    api_key: ${HF_API_KEY}
+    priority: 100
     models:
-      - id: deepseek-ai/DeepSeek-R1
-        mode: thinking
-        context: 256000
-      - id: Qwen/Qwen3-235B-A22B
-        mode: thinking
-        context: 128000
-      - id: MiniMaxAI/MiniMax-M2
+      - id: groq/llama-3.3-70b-versatile
         mode: non_thinking
         context: 128000
-      - id: google/gemma-3-12b-it
-        mode: local
+        free: true
+        speed: fastest
+      - id: groq/mixtral-8x7b-32768
+        mode: thinking
+        context: 32768
+        free: true
+        speed: fast
+      - id: groq/llama-3.1-8b-instant
+        mode: non_thinking
         context: 128000
+        free: true
+        speed: ultra-fast
+      - id: together/qwen/qwen3-32b
+        mode: thinking
+        context: 128000
+        free: true
+      - id: together/deepseek-ai/DeepSeek-R1-Distill-Qwen-32B
+        mode: thinking
+        context: 128000
+        free: true
+      - id: together/meta-llama/Llama-3.3-70B-Instruct-Turbo
+        mode: non_thinking
+        context: 128000
+        free: true
+      - id: hf/meta-llama/Llama-3.2-90B-Vision-Instruct-Turbo
+        mode: any
+        context: 128000
+        free: true
+        rate_limited: true
 
+  # LOCAL PROVIDERS (run on your machine)
   ollama:
     enabled: true
     base_url: http://localhost:11434
@@ -32,34 +54,49 @@ providers:
         mode: thinking
         context: 128000
 
+  # PAID/CLOUD PROVIDERS (require API keys)
+  huggingface:
+    enabled: false
+    api_key: ${HF_API_KEY}
+    models:
+      - id: deepseek-ai/DeepSeek-R1
+        mode: thinking
+        context: 256000
+      - id: Qwen/Qwen3-235B-A22B
+        mode: thinking
+        context: 128000
+      - id: MiniMaxAI/MiniMax-M2
+        mode: non_thinking
+        context: 128000
+
   vllm:
     enabled: false
     base_url: http://localhost:8000
     models: []
 
-# Agent Configuration
+# Agent Configuration (ZERO COST by default)
 agents:
   drafting:
-    provider: huggingface
-    model: MiniMaxAI/MiniMax-M2
+    provider: free
+    model: groq/llama-3.3-70b-versatile
     temperature: 0.8
     max_tokens: 8192
     
   editing:
-    provider: huggingface
-    model: Qwen/Qwen3-235B-A22B
+    provider: free
+    model: together/qwen/qwen3-32b
     temperature: 0.5
     max_tokens: 4096
     
   polish:
-    provider: ollama
-    model: phi4:latest
+    provider: free
+    model: groq/llama-3.1-8b-instant
     temperature: 0.3
     max_tokens: 2048
     
   thinking:
-    provider: huggingface
-    model: deepseek-ai/DeepSeek-R1
+    provider: free
+    model: together/deepseek-ai/DeepSeek-R1-Distill-Qwen-32B
     temperature: 0.7
     max_tokens: 8192
 

@@ -12,7 +12,7 @@
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Stars](https://img.shields.io/github/stars/irfancode/ai-writing-agent?style=social)](https://github.com/irfancode/ai-writing-agent)
 
-**Dual-Mode | Multi-Agent | High-Context | Open-Source**
+**Dual-Mode | Multi-Agent | High-Context | Open-Source | Zero-Cost**
 
 </div>
 
@@ -20,12 +20,13 @@
 
 ## 🎯 Overview
 
-AI Writing Agent is a **production-grade, open-source writing system** that combines the best of 2026's open-source AI models with enterprise features:
+AI Writing Agent is a **production-grade, open-source writing system** that combines the best of 2026's open-source AI models with enterprise features. **Works out-of-the-box with zero API keys** using Ollama local models or free cloud tiers:
 
 | Feature | Description |
 |---------|-------------|
 | 🧠 **Dual-Mode Writing** | Switch between "Thinking Mode" (planning/structure) and "Non-Thinking Mode" (quick drafting) |
 | 🔄 **Model Agnostic** | Use any model: Qwen3, DeepSeek-R1, Gemma, Phi-4, Llama, Mistral |
+| 💰 **Zero-Cost Mode** | Works without API keys using Ollama (local) or free cloud tiers |
 | 📚 **High-Context Memory** | 128K-256K token context for long documents |
 | 🔍 **Local RAG** | Read local PDF/text files for style guides |
 | ✏️ **Real-Time Editing** | Inline suggestions with reasoning traces |
@@ -98,52 +99,60 @@ Based on latest benchmarks, we support these models optimally:
 
 ---
 
-## 🚀 Quick Start
+## 🚀 Quick Start (Zero-Cost Mode)
 
-### Prerequisites
+### Zero-Config (No API Keys Required)
 
 ```bash
-# Python 3.10+
-python --version
-
-# Node.js 18+ (for Vue frontend)
-node --version
-
-# Optional: Ollama for local models
+# Install Ollama (truly free, runs locally)
 brew install ollama  # macOS
 curl -fsSL https://ollama.com/install.sh | sh  # Linux
+
+# Pull a model
+ollama pull llama3.3
+
+# Clone and run
+git clone https://github.com/irfancode/ai-writing-agent.git
+cd ai-writing-agent
+python -m venv venv && source venv/bin/activate
+pip install -r requirements.txt
+
+# Run CLI (works immediately!)
+python -m src.cli.main write "Write a haiku about AI"
 ```
 
-### Installation
+### With Free Cloud APIs (More Power)
 
 ```bash
-# Clone repository
+# Get free API keys:
+# - Groq: https://console.groq.com/keys (free tier)
+# - Together AI: https://api.together.xyz/settings/api-keys (free tier)
+# - HuggingFace: https://huggingface.co/settings/tokens (free tier)
+
+export GROQ_API_KEY="gsk_..."
+export TOGETHER_API_KEY="..."
+
+# Now you have access to:
+# - Llama 3.3 70B (Groq - fastest free tier)
+# - Qwen3 32B (Together AI)
+# - DeepSeek-R1 32B (Together AI)
+```
+
+### Full Installation
+
+```bash
 git clone https://github.com/irfancode/ai-writing-agent.git
 cd ai-writing-agent
 
-# Install Python dependencies
+# Python 3.10+
 python -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
 
-# Install frontend dependencies
+# Frontend (optional)
 cd frontend && npm install && cd ..
 
-# Configure models
-cp config/models.example.yaml config/models.yaml
-# Edit config/models.yaml with your model endpoints
-```
-
-### Run
-
-```bash
-# Start API server
-python -m src.api.server
-
-# Start Vue frontend (new terminal)
-cd frontend && npm run dev
-
-# Or use CLI
+# Run
 python -m src.cli.main --interactive
 ```
 

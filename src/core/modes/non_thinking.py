@@ -79,7 +79,7 @@ class NonThinkingMode:
     def __init__(
         self,
         registry: ModelRegistry,
-        default_model: str = "MiniMaxAI/MiniMax-M2",
+        default_model: str = "llama3.3:latest",
     ):
         self.registry = registry
         self.default_model = default_model
