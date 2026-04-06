@@ -28,10 +28,22 @@ AI Writing Agent is a **production-grade, open-source writing system** that comb
 | 🔄 **Model Agnostic** | Use any model: Qwen3, DeepSeek-R1, Gemma, Phi-4, Llama, Mistral |
 | 💰 **Zero-Cost Mode** | Works without API keys using Ollama (local) or free cloud tiers |
 | 📚 **High-Context Memory** | 128K-256K token context for long documents |
-| 🔍 **Local RAG** | Read local PDF/text files for style guides |
 | ✏️ **Real-Time Editing** | Inline suggestions with reasoning traces |
 | 🤖 **Multi-Agent** | Drafting + Editing sub-agents collaborate |
-| 🚀 **vLLM Optimized** | Production-grade serving with tensor parallelism |
+| 🔄 **Automatic Fallback** | Switches providers automatically if one fails |
+
+---
+
+## 📚 Documentation
+
+| Document | Description |
+|----------|-------------|
+| [🚀 Quick Start](docs/USER_GUIDE.md#quick-start) | Get running in 5 minutes |
+| [📖 Complete User Guide](docs/USER_GUIDE.md) | All commands and features |
+| [✨ Feature Showcase](docs/FEATURE_SHOWCASE.md) | Visual examples with outputs |
+| [📝 Marketing Blog](docs/BLOG_POST.md) | Why AI Writing Agent changes everything |
+| [🔑 API Keys Setup](docs/API_KEYS.md) | Free API configuration |
+| [🧪 Test Report](docs/TEST_REPORT.md) | 33 tests, 100% passing |
 
 ---
 
@@ -39,13 +51,12 @@ AI Writing Agent is a **production-grade, open-source writing system** that comb
 
 Based on latest benchmarks, we support these models optimally:
 
-| Model | Best For | Context | Speed | License |
-|-------|----------|---------|-------|---------|
-| **Qwen3-235B-A22B** | Creative Writing & Prose | 128K | Medium | Apache 2.0 |
-| **DeepSeek-R1** | Reasoning & Complex Tasks | 256K | Fast | MIT |
-| **MiMo-V2-Flash** | High-Throughput | 128K | ⚡⚡⚡ | Apache 2.0 |
-| **Gemma 3 12B** | Local/Mobile | 128K | Fast | Gemma TOS |
-| **Phi-4** | Edge Devices | 128K | ⚡⚡ | MIT |
+| Model | Provider | Best For | Speed | Cost |
+|-------|----------|----------|-------|------|
+| **Llama 3.3 70B** | Groq | General Writing | ⚡⚡⚡ | Free |
+| **Mixtral 8x7B** | Groq | Thinking/Planning | ⚡⚡⚡ | Free |
+| **Qwen3 32B** | Together AI | Creative | ⚡⚡ | Free |
+| **DeepSeek-R1 32B** | Together AI | Reasoning | ⚡⚡ | Free |
 
 ---
 
