@@ -1,0 +1,383 @@
+# AI Writing Agent - Enterprise Open-Source Edition
+
+<div align="center">
+
+![AI Writing Agent](docs/assets/banner.png)
+
+**The Ultimate Open-Source AI Writing System for 2026**
+
+[![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://python.org)
+[![Vue.js](https://img.shields.io/badge/Vue.js-3.x-42b883.svg)](https://vuejs.org)
+[![vLLM](https://img.shields.io/badge/vLLM-Optimized-green.svg)](https://docs.vllm.ai)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Stars](https://img.shields.io/github/stars/irfancode/ai-writing-agent?style=social)](https://github.com/irfancode/ai-writing-agent)
+
+**Dual-Mode | Multi-Agent | High-Context | Open-Source**
+
+</div>
+
+---
+
+## 🎯 Overview
+
+AI Writing Agent is a **production-grade, open-source writing system** that combines the best of 2026's open-source AI models with enterprise features:
+
+| Feature | Description |
+|---------|-------------|
+| 🧠 **Dual-Mode Writing** | Switch between "Thinking Mode" (planning/structure) and "Non-Thinking Mode" (quick drafting) |
+| 🔄 **Model Agnostic** | Use any model: Qwen3, DeepSeek-R1, Gemma, Phi-4, Llama, Mistral |
+| 📚 **High-Context Memory** | 128K-256K token context for long documents |
+| 🔍 **Local RAG** | Read local PDF/text files for style guides |
+| ✏️ **Real-Time Editing** | Inline suggestions with reasoning traces |
+| 🤖 **Multi-Agent** | Drafting + Editing sub-agents collaborate |
+| 🚀 **vLLM Optimized** | Production-grade serving with tensor parallelism |
+
+---
+
+## 🏆 2026 Best Open-Source Models
+
+Based on latest benchmarks, we support these models optimally:
+
+| Model | Best For | Context | Speed | License |
+|-------|----------|---------|-------|---------|
+| **Qwen3-235B-A22B** | Creative Writing & Prose | 128K | Medium | Apache 2.0 |
+| **DeepSeek-R1** | Reasoning & Complex Tasks | 256K | Fast | MIT |
+| **MiMo-V2-Flash** | High-Throughput | 128K | ⚡⚡⚡ | Apache 2.0 |
+| **Gemma 3 12B** | Local/Mobile | 128K | Fast | Gemma TOS |
+| **Phi-4** | Edge Devices | 128K | ⚡⚡ | MIT |
+
+---
+
+## 🏗️ Architecture
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                    AI Writing Agent System                           │
+├─────────────────────────────────────────────────────────────────────┤
+│                                                                     │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐                │
+│  │   Vue.js    │  │   CLI       │  │   API       │                │
+│  │   Frontend  │  │   Interface  │  │   Server    │                │
+│  └──────┬──────┘  └──────┬──────┘  └──────┬──────┘                │
+│         └────────────────┼────────────────┘                         │
+│                          │                                          │
+│  ┌───────────────────────▼────────────────────────────────────┐  │
+│  │              Dual-Mode Orchestrator                           │  │
+│  │  ┌─────────────────┐    ┌─────────────────┐                 │  │
+│  │  │  Thinking Mode   │◄──►│ Non-Thinking Mode│                │  │
+│  │  │  (Planning)     │    │ (Quick Drafting) │                │  │
+│  │  └─────────────────┘    └─────────────────┘                 │  │
+│  └─────────────────────────────────────────────────────────────┘  │
+│                          │                                          │
+│  ┌───────────────────────▼────────────────────────────────────┐  │
+│  │                    Multi-Agent System                         │  │
+│  │  ┌──────────┐    ┌──────────┐    ┌──────────┐               │  │
+│  │  │  Draft   │──►│  Edit    │──►│  Polish  │               │  │
+│  │  │  Agent   │    │  Agent   │    │  Agent   │               │  │
+│  │  └──────────┘    └──────────┘    └──────────┘               │  │
+│  └─────────────────────────────────────────────────────────────┘  │
+│                          │                                          │
+│  ┌───────────────────────▼────────────────────────────────────┐  │
+│  │              Model Provider Layer (Model Agnostic)             │  │
+│  │  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐    │  │
+│  │  │ HuggingFace│  │  Ollama  │  │  vLLM    │  │  OpenAI  │    │  │
+│  │  │   API     │  │  Local   │  │  Server  │  │ 兼容     │    │  │
+│  │  └──────────┘  └──────────┘  └──────────┘  └──────────┘    │  │
+│  └─────────────────────────────────────────────────────────────┘  │
+│                          │                                          │
+│  ┌───────────────────────▼────────────────────────────────────┐  │
+│  │              High-Context Memory + RAG                       │  │
+│  │  ┌────────────┐  ┌────────────┐  ┌────────────┐           │  │
+│  │  │  Document  │  │  Character │  │   Style    │           │  │
+│  │  │  Memory    │  │   Bank     │  │   Guide    │           │  │
+│  │  └────────────┘  └────────────┘  └────────────┘           │  │
+│  └─────────────────────────────────────────────────────────────┘  │
+│                                                                     │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+```bash
+# Python 3.10+
+python --version
+
+# Node.js 18+ (for Vue frontend)
+node --version
+
+# Optional: Ollama for local models
+brew install ollama  # macOS
+curl -fsSL https://ollama.com/install.sh | sh  # Linux
+```
+
+### Installation
+
+```bash
+# Clone repository
+git clone https://github.com/irfancode/ai-writing-agent.git
+cd ai-writing-agent
+
+# Install Python dependencies
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+
+# Install frontend dependencies
+cd frontend && npm install && cd ..
+
+# Configure models
+cp config/models.example.yaml config/models.yaml
+# Edit config/models.yaml with your model endpoints
+```
+
+### Run
+
+```bash
+# Start API server
+python -m src.api.server
+
+# Start Vue frontend (new terminal)
+cd frontend && npm run dev
+
+# Or use CLI
+python -m src.cli.main --interactive
+```
+
+---
+
+## 🎮 Dual-Mode Writing
+
+The signature feature: seamlessly switch between two modes:
+
+### Thinking Mode (Deep Planning)
+- Outlining and structure
+- Character development
+- Plot point tracking
+- Brand voice definition
+- Uses reasoning-heavy models (DeepSeek-R1)
+
+### Non-Thinking Mode (Fast Drafting)
+- Quick content generation
+- Editing and rephrasing
+- Format conversion
+- Uses speed-optimized models (MiMo-V2)
+
+```python
+# Example: Switching modes
+agent = DualModeWriter()
+
+# Thinking: Plan a novel chapter
+plan = await agent.think(
+    prompt="Outline Chapter 3: The Discovery",
+    mode="creative_outline"
+)
+
+# Non-Thinking: Quick draft
+draft = await agent.write(
+    outline=plan,
+    mode="fast_draft"
+)
+```
+
+---
+
+## 🤖 Multi-Agent Collaboration
+
+Three specialized agents work together:
+
+```python
+# Draft Agent - Generates initial content
+draft = await drafting_agent.write(
+    topic="AI in Healthcare",
+    style="technical_blog"
+)
+
+# Edit Agent - Improves structure and clarity
+edited = await editing_agent.revise(
+    content=draft,
+    focus="clarity_coherence"
+)
+
+# Polish Agent - Final refinement
+polished = await polish_agent.finalize(
+    content=edited,
+    constraints=["seo_optimized", "engaging"]
+)
+```
+
+---
+
+## 📚 Local RAG System
+
+Load your documents for style-consistent writing:
+
+```bash
+# Add style guides and reference documents
+python -m src.rag.ingest \
+    --path ./my-style-guide.md \
+    --type style_guide
+
+python -m src.rag.ingest \
+    --path ./character-bibles/ \
+    --type character_bank
+```
+
+The agent will use these documents to maintain consistency.
+
+---
+
+## 🔍 Real-Time Editing
+
+See the AI's reasoning as it edits:
+
+```
+Original:  "The cat go to the store."
+
+Reasoning: "Subject-verb agreement error. 'cat' is singular, 'go' should be 'goes'. 
+            Also, missing preposition. 'to' works but 'went to' implies past tense."
+
+Suggestion: "The cat went to the store."
+Confidence: 95%
+```
+
+---
+
+## 🛠️ Configuration
+
+### config/models.yaml
+
+```yaml
+providers:
+  - name: huggingface
+    type: huggingface
+    api_key: ${HF_API_KEY}
+    models:
+      - id: Qwen/Qwen3-235B-A22B
+        mode: thinking
+        context: 128000
+      - id: deepseek-ai/DeepSeek-R1
+        mode: thinking
+        context: 256000
+      - id: MiniMax/MiniMax-M2
+        mode: non_thinking
+        context: 128000
+
+  - name: ollama
+    type: ollama
+    base_url: http://localhost:11434
+    models:
+      - id: gemma3:12b
+        mode: local
+        context: 128000
+      - id: phi4:latest
+        mode: local
+        context: 128000
+```
+
+### config/agents.yaml
+
+```yaml
+agents:
+  drafting:
+    provider: huggingface
+    model: MiniMax-M2-Flash
+    temperature: 0.8
+    
+  editing:
+    provider: huggingface
+    model: Qwen3-235B-A22B
+    temperature: 0.5
+    
+  polish:
+    provider: ollama
+    model: phi4:latest
+    temperature: 0.3
+```
+
+---
+
+## 🧪 Testing
+
+```bash
+# Run all tests
+pytest tests/ -v
+
+# Test specific module
+pytest tests/test_modes.py -v
+pytest tests/test_agents.py -v
+pytest tests/test_rag.py -v
+
+# Run integration tests
+pytest tests/integration/ -v
+```
+
+---
+
+## 📦 API Reference
+
+### POST /api/v1/generate
+
+```json
+{
+  "mode": "thinking",
+  "prompt": "Outline a mystery novel set in Victorian London",
+  "context": {
+    "characters": ["Sherlock Holmes", "Dr. Watson"],
+    "genre": "mystery"
+  },
+  "model": "deepseek-ai/DeepSeek-R1",
+  "stream": false
+}
+```
+
+### POST /api/v1/edit
+
+```json
+{
+  "content": "The quick brown fox jumps over the lazy dog",
+  "instruction": "Make this more engaging",
+  "show_reasoning": true,
+  "model": "Qwen3-235B-A22B"
+}
+```
+
+---
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create feature branch: `git checkout -b feature/amazing`
+3. Commit changes: `git commit -m 'Add amazing feature'`
+4. Push: `git push origin feature/amazing`
+5. Open PR
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
+
+---
+
+## 📄 License
+
+MIT License - see [LICENSE](LICENSE)
+
+---
+
+## 🙏 Acknowledgments
+
+- [Hugging Face](https://huggingface.co) - Model Hub
+- [vLLM Team](https://docs.vllm.ai) - Serving Optimization
+- [LangChain](https://langchain.dev) - Agent Framework
+- [Qwen Team](https://qwenlm.ai) - Qwen3 Models
+- [DeepSeek](https://deepseek.com) - DeepSeek-R1
+- [Vue.js](https://vuejs.org) - Frontend Framework
+
+---
+
+<div align="center">
+
+**Star us** ⭐ | **Fork us** 🍴 | **Join Discord** 💬
+
+</div>

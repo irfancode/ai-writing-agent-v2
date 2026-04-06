@@ -1,0 +1,81 @@
+# AI Writing Agent Configuration
+
+providers:
+  huggingface:
+    enabled: true
+    api_key: ${HF_API_KEY}
+    models:
+      - id: deepseek-ai/DeepSeek-R1
+        mode: thinking
+        context: 256000
+      - id: Qwen/Qwen3-235B-A22B
+        mode: thinking
+        context: 128000
+      - id: MiniMaxAI/MiniMax-M2
+        mode: non_thinking
+        context: 128000
+      - id: google/gemma-3-12b-it
+        mode: local
+        context: 128000
+
+  ollama:
+    enabled: true
+    base_url: http://localhost:11434
+    models:
+      - id: gemma3:12b
+        mode: local
+        context: 128000
+      - id: phi4:latest
+        mode: local
+        context: 128000
+      - id: deepseek-r1:14b
+        mode: thinking
+        context: 128000
+
+  vllm:
+    enabled: false
+    base_url: http://localhost:8000
+    models: []
+
+# Agent Configuration
+agents:
+  drafting:
+    provider: huggingface
+    model: MiniMaxAI/MiniMax-M2
+    temperature: 0.8
+    max_tokens: 8192
+    
+  editing:
+    provider: huggingface
+    model: Qwen/Qwen3-235B-A22B
+    temperature: 0.5
+    max_tokens: 4096
+    
+  polish:
+    provider: ollama
+    model: phi4:latest
+    temperature: 0.3
+    max_tokens: 2048
+    
+  thinking:
+    provider: huggingface
+    model: deepseek-ai/DeepSeek-R1
+    temperature: 0.7
+    max_tokens: 8192
+
+# Writing Defaults
+defaults:
+  writing_style: narrative
+  thinking_depth: medium
+  max_context_tokens: 128000
+
+# RAG Configuration
+rag:
+  chunk_size: 1000
+  chunk_overlap: 200
+  embedding_model: nomic-embed-text:latest
+
+# Memory Configuration
+memory:
+  max_entries: 10000
+  context_window: 128000
