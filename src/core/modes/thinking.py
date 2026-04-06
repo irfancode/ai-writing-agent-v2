@@ -135,7 +135,7 @@ Show your complete reasoning process.""",
     def __init__(
         self,
         registry: ModelRegistry,
-        default_model: str = "qwen2.5:latest",
+        default_model: str = "groq/mixtral-8x7b-32768",
     ):
         self.registry = registry
         self.default_model = default_model

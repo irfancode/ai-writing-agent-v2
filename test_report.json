@@ -1,0 +1,310 @@
+{
+  "timestamp": "2026-04-06T17:41:24.378830",
+  "mode": "mock",
+  "summary": {
+    "total": 33,
+    "passed": 33,
+    "failed": 0,
+    "success_rate": "100.0%",
+    "duration_ms": 2129.4450759887695
+  },
+  "test_results": [
+    {
+      "test_name": "Provider Registration",
+      "status": "PASS",
+      "duration_ms": 0.0019073486328125,
+      "output": "Registered providers: ['mock']",
+      "expected_behavior": "At least one provider registered",
+      "actual_behavior": "Registered: mock",
+      "notes": ""
+    },
+    {
+      "test_name": "Model Registration",
+      "status": "PASS",
+      "duration_ms": 0,
+      "output": "Total models: 2",
+      "expected_behavior": "Models registered in providers",
+      "actual_behavior": "Total models: 2",
+      "notes": ""
+    },
+    {
+      "test_name": "Model: mock/llama-3.3-70b",
+      "status": "PASS",
+      "duration_ms": 0,
+      "output": "Mode: non_thinking, Capabilities: ['text', 'fast', 'creative']",
+      "expected_behavior": "Model has mode and capabilities",
+      "actual_behavior": "Mode=non_thinking, Context=128000",
+      "notes": ""
+    },
+    {
+      "test_name": "Model: mock/mixtral-8x7b",
+      "status": "PASS",
+      "duration_ms": 0,
+      "output": "Mode: thinking, Capabilities: ['text', 'reasoning', 'fast']",
+      "expected_behavior": "Model has mode and capabilities",
+      "actual_behavior": "Mode=thinking, Context=32768",
+      "notes": ""
+    },
+    {
+      "test_name": "Write: haiku",
+      "status": "PASS",
+      "duration_ms": 101.2270450592041,
+      "output": "Generated 79 chars",
+      "expected_behavior": "Content generated with haiku structure",
+      "actual_behavior": "Content length: 79, Structured: False",
+      "notes": "Mode: non_thinking"
+    },
+    {
+      "test_name": "Write: blog",
+      "status": "PASS",
+      "duration_ms": 101.2578010559082,
+      "output": "Generated 873 chars",
+      "expected_behavior": "Content generated with blog structure",
+      "actual_behavior": "Content length: 873, Structured: True",
+      "notes": "Mode: non_thinking"
+    },
+    {
+      "test_name": "Write: email",
+      "status": "PASS",
+      "duration_ms": 101.44495964050293,
+      "output": "Generated 434 chars",
+      "expected_behavior": "Content generated with email structure",
+      "actual_behavior": "Content length: 434, Structured: True",
+      "notes": "Mode: non_thinking"
+    },
+    {
+      "test_name": "Write: linkedin",
+      "status": "PASS",
+      "duration_ms": 101.41897201538086,
+      "output": "Generated 873 chars",
+      "expected_behavior": "Content generated with linkedin structure",
+      "actual_behavior": "Content length: 873, Structured: True",
+      "notes": "Mode: non_thinking"
+    },
+    {
+      "test_name": "Write: technical",
+      "status": "PASS",
+      "duration_ms": 101.40180587768555,
+      "output": "Generated 915 chars",
+      "expected_behavior": "Content generated with technical structure",
+      "actual_behavior": "Content length: 915, Structured: True",
+      "notes": "Mode: non_thinking"
+    },
+    {
+      "test_name": "Think: outline",
+      "status": "PASS",
+      "duration_ms": 101.57108306884766,
+      "output": "Generated 20 chars, 20 steps",
+      "expected_behavior": "Structured thinking output for outline",
+      "actual_behavior": "Content: 20 chars, Steps: 20",
+      "notes": ""
+    },
+    {
+      "test_name": "Think: character",
+      "status": "PASS",
+      "duration_ms": 101.5329360961914,
+      "output": "Generated 42 chars, 21 steps",
+      "expected_behavior": "Structured thinking output for character",
+      "actual_behavior": "Content: 42 chars, Steps: 21",
+      "notes": ""
+    },
+    {
+      "test_name": "Think: research",
+      "status": "PASS",
+      "duration_ms": 101.60374641418457,
+      "output": "Generated 31 chars, 21 steps",
+      "expected_behavior": "Structured thinking output for research",
+      "actual_behavior": "Content: 31 chars, Steps: 21",
+      "notes": ""
+    },
+    {
+      "test_name": "Edit: grammar",
+      "status": "PASS",
+      "duration_ms": 100.75187683105469,
+      "output": "Edited: 7 changes",
+      "expected_behavior": "Text edited with reasoning",
+      "actual_behavior": "Changed: True, Has reasoning: False",
+      "notes": "Original: The cat go to the store yesterday...."
+    },
+    {
+      "test_name": "Edit: professional",
+      "status": "PASS",
+      "duration_ms": 101.37009620666504,
+      "output": "Edited: 12 changes",
+      "expected_behavior": "Text edited with reasoning",
+      "actual_behavior": "Changed: True, Has reasoning: False",
+      "notes": "Original: Hey so I was thinking maybe we could like talk lat..."
+    },
+    {
+      "test_name": "Edit: clarity",
+      "status": "PASS",
+      "duration_ms": 101.4411449432373,
+      "output": "Edited: 2 changes",
+      "expected_behavior": "Text edited with reasoning",
+      "actual_behavior": "Changed: True, Has reasoning: False",
+      "notes": "Original: The system utilizes advanced machine learning algo..."
+    },
+    {
+      "test_name": "Style: narrative",
+      "status": "PASS",
+      "duration_ms": 101.35507583618164,
+      "output": "Generated 642 chars",
+      "expected_behavior": "Content generated in specified style",
+      "actual_behavior": "Style: narrative, Length: 642",
+      "notes": ""
+    },
+    {
+      "test_name": "Style: technical",
+      "status": "PASS",
+      "duration_ms": 100.88610649108887,
+      "output": "Generated 915 chars",
+      "expected_behavior": "Content generated in specified style",
+      "actual_behavior": "Style: technical, Length: 915",
+      "notes": ""
+    },
+    {
+      "test_name": "Style: marketing",
+      "status": "PASS",
+      "duration_ms": 101.31096839904785,
+      "output": "Generated 642 chars",
+      "expected_behavior": "Content generated in specified style",
+      "actual_behavior": "Style: marketing, Length: 642",
+      "notes": ""
+    },
+    {
+      "test_name": "Style: concise",
+      "status": "PASS",
+      "duration_ms": 101.2260913848877,
+      "output": "Generated 642 chars",
+      "expected_behavior": "Content generated in specified style",
+      "actual_behavior": "Style: concise, Length: 642",
+      "notes": ""
+    },
+    {
+      "test_name": "Style: creative",
+      "status": "PASS",
+      "duration_ms": 101.32384300231934,
+      "output": "Generated 642 chars",
+      "expected_behavior": "Content generated in specified style",
+      "actual_behavior": "Style: creative, Length: 642",
+      "notes": ""
+    },
+    {
+      "test_name": "Style: formal",
+      "status": "PASS",
+      "duration_ms": 101.49598121643066,
+      "output": "Generated 642 chars",
+      "expected_behavior": "Content generated in specified style",
+      "actual_behavior": "Style: formal, Length: 642",
+      "notes": ""
+    },
+    {
+      "test_name": "Style: casual",
+      "status": "PASS",
+      "duration_ms": 101.16815567016602,
+      "output": "Generated 177 chars",
+      "expected_behavior": "Content generated in specified style",
+      "actual_behavior": "Style: casual, Length: 177",
+      "notes": ""
+    },
+    {
+      "test_name": "Style: academic",
+      "status": "PASS",
+      "duration_ms": 101.36604309082031,
+      "output": "Generated 642 chars",
+      "expected_behavior": "Content generated in specified style",
+      "actual_behavior": "Style: academic, Length: 642",
+      "notes": ""
+    },
+    {
+      "test_name": "Pipeline: Think + Write",
+      "status": "PASS",
+      "duration_ms": 202.8818130493164,
+      "output": "Think: 20 chars, Draft: 486 chars",
+      "expected_behavior": "Both thinking and draft content generated",
+      "actual_behavior": "Think: 20, Draft: 486, Steps: 20",
+      "notes": "Full pipeline test"
+    },
+    {
+      "test_name": "Memory: Add & Retrieve Character",
+      "status": "PASS",
+      "duration_ms": 0.08606910705566406,
+      "output": "Character retrieved: Sarah Chen",
+      "expected_behavior": "Character added and retrieved",
+      "actual_behavior": "Character: Sarah Chen",
+      "notes": ""
+    },
+    {
+      "test_name": "Memory: Add Plot Point",
+      "status": "PASS",
+      "duration_ms": 0,
+      "output": "Plot points: 1",
+      "expected_behavior": "Plot point added",
+      "actual_behavior": "Total plot points: 1",
+      "notes": ""
+    },
+    {
+      "test_name": "Memory: Pruning",
+      "status": "PASS",
+      "duration_ms": 0,
+      "output": "Memory pruning successful",
+      "expected_behavior": "Low importance entries pruned",
+      "actual_behavior": "Temp value after prune: Temporary information",
+      "notes": ""
+    },
+    {
+      "test_name": "Session: Create & Get",
+      "status": "PASS",
+      "duration_ms": 0.03814697265625,
+      "output": "Session created and retrieved",
+      "expected_behavior": "Session management working",
+      "actual_behavior": "Active sessions: 1",
+      "notes": ""
+    },
+    {
+      "test_name": "Session: Close",
+      "status": "PASS",
+      "duration_ms": 0,
+      "output": "Session closed",
+      "expected_behavior": "Session properly closed",
+      "actual_behavior": "Sessions remaining: 0",
+      "notes": ""
+    },
+    {
+      "test_name": "Model: Thinking Mode",
+      "status": "PASS",
+      "duration_ms": 0.06699562072753906,
+      "output": "Selected: mock/mixtral-8x7b",
+      "expected_behavior": "Model selected for thinking",
+      "actual_behavior": "Model: mock/mixtral-8x7b",
+      "notes": ""
+    },
+    {
+      "test_name": "Model: Non-Thinking Mode",
+      "status": "PASS",
+      "duration_ms": 0,
+      "output": "Selected: mock/llama-3.3-70b",
+      "expected_behavior": "Model selected for non-thinking",
+      "actual_behavior": "Model: mock/llama-3.3-70b",
+      "notes": ""
+    },
+    {
+      "test_name": "Model: Any Mode",
+      "status": "PASS",
+      "duration_ms": 0,
+      "output": "Selected: mock/llama-3.3-70b",
+      "expected_behavior": "Any model can be selected",
+      "actual_behavior": "Model: mock/llama-3.3-70b",
+      "notes": ""
+    },
+    {
+      "test_name": "Provider: mock",
+      "status": "PASS",
+      "duration_ms": 0.0057220458984375,
+      "output": "Status: HEALTHY",
+      "expected_behavior": "Provider health checked",
+      "actual_behavior": "Healthy: True",
+      "notes": ""
+    }
+  ]
+}

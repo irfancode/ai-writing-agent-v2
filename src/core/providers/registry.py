@@ -301,14 +301,13 @@ def get_registry() -> ModelRegistry:
 
 
 def init_registry(config: Optional[Dict] = None) -> ModelRegistry:
-    """Initialize registry with configuration - ZERO COST by default"""
+    """Initialize registry with remote API providers only - no local Ollama"""
     registry = get_registry()
     
     if registry._providers:
         return registry
     
     from .free import FreeProvider
-    from .ollama import OllamaProvider
     from .huggingface import HuggingFaceProvider
     
     free_provider = FreeProvider()
@@ -316,13 +315,6 @@ def init_registry(config: Optional[Dict] = None) -> ModelRegistry:
         provider_type=ProviderType.OPENAI,
         enabled=True,
         priority=100,
-    ))
-    
-    ollama_provider = OllamaProvider()
-    registry.register_provider("ollama", ollama_provider, ProviderConfig(
-        provider_type=ProviderType.OLLAMA,
-        enabled=True,
-        priority=50,
     ))
     
     hf_api_key = os.getenv("HF_API_KEY")

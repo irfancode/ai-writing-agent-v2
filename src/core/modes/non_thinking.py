@@ -79,7 +79,7 @@ class NonThinkingMode:
     def __init__(
         self,
         registry: ModelRegistry,
-        default_model: str = "llama3.3:latest",
+        default_model: str = "groq/llama-3.1-8b-instant",
     ):
         self.registry = registry
         self.default_model = default_model

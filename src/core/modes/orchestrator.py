@@ -135,7 +135,7 @@ class DualModeOrchestrator:
         return WritingResponse(
             content=result.conclusion,
             mode=Mode.THINKING,
-            reasoning=result.reasoning if result.steps else None,
+            reasoning="\n".join([s.thought for s in result.steps]) if result.steps else None,
             thinking_steps=[s.to_dict() for s in result.steps],
             metadata={
                 "thinking_type": thinking_type.value,
