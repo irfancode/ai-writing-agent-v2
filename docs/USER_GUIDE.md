@@ -29,14 +29,14 @@ git clone https://github.com/irfancode/ai-writing-agent-v2git
 cd ai-writing-agent
 
 # Create virtual environment
-python -m venv venv
+python3 -m venv venv
 source venv/bin/activate
 
 # Install dependencies
 pip install -e .
 
 # Run immediately!
-python -m src.cli.main write "Write a haiku about AI"
+python3 -m src.cli.main write "Write a haiku about AI"
 ```
 
 **Output:**
@@ -90,7 +90,7 @@ git clone https://github.com/irfancode/ai-writing-agent-v2git
 cd ai-writing-agent
 
 # 2. Create virtual environment
-python -m venv venv
+python3 -m venv venv
 
 # 3. Activate virtual environment
 source venv/bin/activate  # macOS/Linux
@@ -104,7 +104,7 @@ pip install -e .
 cd frontend && npm install && cd ..
 
 # 6. Verify installation
-python -m src.cli.main models
+python3 -m src.cli.main models
 ```
 
 ---
@@ -116,7 +116,7 @@ python -m src.cli.main models
 Generate various types of content instantly.
 
 ```bash
-python -m src.cli.main write "Your prompt here"
+python3 -m src.cli.main write "Your prompt here"
 ```
 
 **Options:**
@@ -129,16 +129,16 @@ python -m src.cli.main write "Your prompt here"
 
 ```bash
 # Blog post
-python -m src.cli.main write "Write a blog post about the future of AI"
+python3 -m src.cli.main write "Write a blog post about the future of AI"
 
 # Professional email
-python -m src.cli.main write "Write a professional email to my team about project deadline"
+python3 -m src.cli.main write "Write a professional email to my team about project deadline"
 
 # LinkedIn post
-python -m src.cli.main write "Write a LinkedIn post about my new product launch"
+python3 -m src.cli.main write "Write a LinkedIn post about my new product launch"
 
 # Technical documentation
-python -m src.cli.main write "Write API documentation for a user authentication system"
+python3 -m src.cli.main write "Write API documentation for a user authentication system"
 ```
 
 ---
@@ -148,7 +148,7 @@ python -m src.cli.main write "Write API documentation for a user authentication 
 Deep planning and reasoning mode.
 
 ```bash
-python -m src.cli.main think "Your topic"
+python3 -m src.cli.main think "Your topic"
 ```
 
 **Options:**
@@ -164,16 +164,16 @@ python -m src.cli.main think "Your topic"
 
 ```bash
 # Create an outline
-python -m src.cli.main think "Outline a mystery novel set in Victorian London"
+python3 -m src.cli.main think "Outline a mystery novel set in Victorian London"
 
 # Develop a character
-python -m src.cli.main think "Develop a character named Dr. Sarah Chen, a marine biologist"
+python3 -m src.cli.main think "Develop a character named Dr. Sarah Chen, a marine biologist"
 
 # Research a topic
-python -m src.cli.main think "Research the impact of AI on content creation"
+python3 -m src.cli.main think "Research the impact of AI on content creation"
 
 # Deep analysis
-python -m src.cli.main think "Analyze the themes in Frankenstein" --depth deep
+python3 -m src.cli.main think "Analyze the themes in Frankenstein" --depth deep
 ```
 
 ---
@@ -183,7 +183,7 @@ python -m src.cli.main think "Analyze the themes in Frankenstein" --depth deep
 Edit existing text with AI-powered suggestions.
 
 ```bash
-python -m src.cli.main edit --text "Your text" --instruction "What to change"
+python3 -m src.cli.main edit --text "Your text" --instruction "What to change"
 ```
 
 **Options:**
@@ -197,17 +197,17 @@ python -m src.cli.main edit --text "Your text" --instruction "What to change"
 
 ```bash
 # Fix grammar
-python -m src.cli.main edit \
+python3 -m src.cli.main edit \
   --text "The cat goes to the store yesterday" \
   --instruction "Fix grammar errors"
 
 # Make professional
-python -m src.cli.main edit \
+python3 -m src.cli.main edit \
   --text "Hey, I was thinking maybe we could like reschedule?" \
   --instruction "Make it professional"
 
 # Improve clarity
-python -m src.cli.main edit \
+python3 -m src.cli.main edit \
   --text "The system utilizes advanced machine learning algorithms trained on vast datasets" \
   --instruction "Improve clarity"
 ```
@@ -219,13 +219,13 @@ python -m src.cli.main edit \
 Complete think + write workflow.
 
 ```bash
-python -m src.cli.main pipeline "Your topic"
+python3 -m src.cli.main pipeline "Your topic"
 ```
 
 **Examples:**
 
 ```bash
-python -m src.cli.main pipeline "The Future of Remote Work"
+python3 -m src.cli.main pipeline "The Future of Remote Work"
 ```
 
 This will:
@@ -239,7 +239,7 @@ This will:
 Interactive chat interface.
 
 ```bash
-python -m src.cli.main interactive
+python3 -m src.cli.main interactive
 ```
 
 **Commands in interactive mode:**
@@ -260,7 +260,7 @@ exit                 - Exit
 List all available models.
 
 ```bash
-python -m src.cli.main models
+python3 -m src.cli.main models
 ```
 
 **Output:**

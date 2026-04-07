@@ -147,11 +147,11 @@ ollama pull llama3.3
 # Clone and run
 git clone https://github.com/irfancode/ai-writing-agent-v2git
 cd ai-writing-agent
-python -m venv venv && source venv/bin/activate
+python3 -m venv venv && source venv/bin/activate
 pip install -e .
 
 # Run CLI (works immediately!)
-python -m src.cli.main write "Write a haiku about AI"
+python3 -m src.cli.main write "Write a haiku about AI"
 ```
 
 ### With Free Cloud APIs (More Power)
@@ -183,14 +183,13 @@ cd ai-writing-agent
 # Starts the API Server on port 8000 and Vue frontend on port 5173
 docker-compose up -d
 
-# Option B: Manual uv installation
-python -m venv venv
+# Option B: Manual Installation
+python3 -m venv venv
 source venv/bin/activate
-pip install uv
-uv pip install -e .[dev]
+pip install -e .[dev]
 
 # Run CLI Interactive Mode
-python -m src.cli.main interactive
+python3 -m src.cli.main interactive
 ```
 
 ---
@@ -263,11 +262,11 @@ Load your documents for style-consistent writing:
 
 ```bash
 # Add style guides and reference documents
-python -m src.rag.ingest \
+python3 -m src.rag.ingest \
     --path ./my-style-guide.md \
     --type style_guide
 
-python -m src.rag.ingest \
+python3 -m src.rag.ingest \
     --path ./character-bibles/ \
     --type character_bank
 ```

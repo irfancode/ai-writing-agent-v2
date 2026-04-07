@@ -70,7 +70,7 @@ This is where the magic happens. Before writing, AI Writing Agent *thinks* about
 
 ```bash
 # Create a detailed outline
-python -m src.cli.main think "Outline a mystery novel chapter" --type outline --depth deep
+python3 -m src.cli.main think "Outline a mystery novel chapter" --type outline --depth deep
 ```
 
 This uses **DeepSeek-R1** or **Qwen3** for advanced reasoning:
@@ -85,7 +85,7 @@ When you need content NOW, this mode delivers in milliseconds:
 
 ```bash
 # Instant blog post
-python -m src.cli.main write "10 Tips for Better Productivity"
+python3 -m src.cli.main write "10 Tips for Better Productivity"
 ```
 
 Uses **Llama 3.3 70B** on Groq's free tier - the fastest free AI available.
@@ -170,7 +170,7 @@ cd ai-writing-agent
 ### Step 2: Install Dependencies
 
 ```bash
-python -m venv venv
+python3 -m venv venv
 source venv/bin/activate
 pip install -e .
 ```
@@ -194,13 +194,13 @@ export TOGETHER_API_KEY="tk_your_key_here"
 
 ```bash
 # Basic write
-python -m src.cli.main write "Write a haiku about artificial intelligence"
+python3 -m src.cli.main write "Write a haiku about artificial intelligence"
 
 # With thinking
-python -m src.cli.main think "Outline a mystery novel chapter"
+python3 -m src.cli.main think "Outline a mystery novel chapter"
 
 # Full pipeline
-python -m src.cli.main pipeline "The Future of Remote Work"
+python3 -m src.cli.main pipeline "The Future of Remote Work"
 ```
 
 **That's it. No credit card. No monthly fees. No limits.**
@@ -289,9 +289,9 @@ Or try it now (mock mode, no API key needed):
 ```bash
 git clone https://github.com/irfancode/ai-writing-agent-v2git
 cd ai-writing-agent
-python -m venv venv && source venv/bin/activate
+python3 -m venv venv && source venv/bin/activate
 pip install -e .
-python -m src.cli.main write "Write a haiku about the future of AI"
+python3 -m src.cli.main write "Write a haiku about the future of AI"
 ```
 
 The future of writing is free, open, and intelligent.

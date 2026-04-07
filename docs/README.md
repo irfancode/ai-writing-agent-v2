@@ -55,9 +55,9 @@ AI Writing Agent is an **open-source, zero-cost** AI writing system that combine
 ```bash
 git clone https://github.com/irfancode/ai-writing-agent-v2git
 cd ai-writing-agent
-python -m venv venv && source venv/bin/activate
+python3 -m venv venv && source venv/bin/activate
 pip install -e .
-python -m src.cli.main write "Write a haiku about AI"
+python3 -m src.cli.main write "Write a haiku about AI"
 ```
 
 ### Option 2: With Free API Keys (Recommended)
@@ -68,7 +68,7 @@ Get free keys:
 
 ```bash
 export GROQ_API_KEY="your_key"
-python -m src.cli.main write "Hello world"
+python3 -m src.cli.main write "Hello world"
 ```
 
 ---
