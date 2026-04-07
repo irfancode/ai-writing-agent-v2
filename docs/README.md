@@ -56,7 +56,7 @@ AI Writing Agent is an **open-source, zero-cost** AI writing system that combine
 git clone https://github.com/irfancode/ai-writing-agent-v2git
 cd ai-writing-agent
 python -m venv venv && source venv/bin/activate
-pip install -r requirements.txt
+pip install -e .
 python -m src.cli.main write "Write a haiku about AI"
 ```
 

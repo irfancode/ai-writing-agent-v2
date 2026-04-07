@@ -21,7 +21,7 @@ keep_files:
 exclude:
   - "*.py"
   - "*.md"
-  - requirements.txt
+  - pyproject.toml
   - src/
   - tests/
   - frontend/

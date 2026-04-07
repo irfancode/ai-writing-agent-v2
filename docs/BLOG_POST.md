@@ -172,7 +172,7 @@ cd ai-writing-agent
 ```bash
 python -m venv venv
 source venv/bin/activate
-pip install -r requirements.txt
+pip install -e .
 ```
 
 ### Step 3: (Optional) Get Free API Keys
@@ -290,7 +290,7 @@ Or try it now (mock mode, no API key needed):
 git clone https://github.com/irfancode/ai-writing-agent-v2git
 cd ai-writing-agent
 python -m venv venv && source venv/bin/activate
-pip install -r requirements.txt
+pip install -e .
 python -m src.cli.main write "Write a haiku about the future of AI"
 ```
 

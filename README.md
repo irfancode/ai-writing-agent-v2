@@ -148,7 +148,7 @@ ollama pull llama3.3
 git clone https://github.com/irfancode/ai-writing-agent-v2git
 cd ai-writing-agent
 python -m venv venv && source venv/bin/activate
-pip install -r requirements.txt
+pip install -e .
 
 # Run CLI (works immediately!)
 python -m src.cli.main write "Write a haiku about AI"

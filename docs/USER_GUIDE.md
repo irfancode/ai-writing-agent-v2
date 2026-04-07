@@ -33,7 +33,7 @@ python -m venv venv
 source venv/bin/activate
 
 # Install dependencies
-pip install -r requirements.txt
+pip install -e .
 
 # Run immediately!
 python -m src.cli.main write "Write a haiku about AI"
@@ -98,7 +98,7 @@ source venv/bin/activate  # macOS/Linux
 .\venv\Scripts\activate  # Windows
 
 # 4. Install dependencies
-pip install -r requirements.txt
+pip install -e .
 
 # 5. (Optional) Install frontend
 cd frontend && npm install && cd ..
