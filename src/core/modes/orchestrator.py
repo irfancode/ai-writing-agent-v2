@@ -10,6 +10,9 @@ from ..providers.base import GenerationOptions, ModelMode
 from ..memory.context import HighContextMemory
 from .thinking import ThinkingMode, ThinkingType, ThinkingRequest, ThinkingResult
 from .non_thinking import NonThinkingMode, WritingStyle, DraftRequest
+from ..logger import get_logger
+
+logger = get_logger()
 
 
 class Mode(Enum):
@@ -59,6 +62,7 @@ class DualModeOrchestrator:
     ):
         self.registry = registry
         self.memory = memory or HighContextMemory()
+        logger.info("DualModeOrchestrator initialized")
         
         # Initialize modes
         self.thinking = ThinkingMode(registry)
@@ -104,6 +108,7 @@ class DualModeOrchestrator:
         depth: str = "medium",
         model: Optional[str] = None,
     ) -> WritingResponse:
+        logger.debug(f"Thinking mode requested. Type: {thinking_type.value}, Depth: {depth}")
         """
         Execute thinking mode for planning/structure.
         

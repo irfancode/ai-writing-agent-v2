@@ -11,6 +11,9 @@ from ..core.modes.orchestrator import DualModeOrchestrator
 from ..core.modes.thinking import ThinkingType
 from ..core.modes.non_thinking import WritingStyle
 from ..core.memory.context import HighContextMemory
+from ..core.logger import get_logger
+
+logger = get_logger()
 
 
 class Colors:
@@ -25,18 +28,22 @@ class Colors:
 
 
 def print_header(text: str):
+    logger.info(f"Header: {text}")
     print(f"\n{Colors.HEADER}{Colors.BOLD}{text}{Colors.ENDC}\n")
 
 
 def print_success(text: str):
+    logger.success(text)
     print(f"{Colors.GREEN}✓ {text}{Colors.ENDC}")
 
 
 def print_info(text: str):
+    logger.info(text)
     print(f"{Colors.CYAN}ℹ {text}{Colors.ENDC}")
 
 
 def print_error(text: str):
+    logger.error(text)
     print(f"{Colors.RED}✗ {text}{Colors.ENDC}")
 
 

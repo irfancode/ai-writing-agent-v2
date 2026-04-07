@@ -140,6 +140,17 @@ Jennifer is writing her first novel. She uses:
 
 > "It's like having a writing partner who never gets tired and always has ideas." - Jennifer M.
 
+### Case Study 4: The Enterprise Content Team
+
+Marcus is the CTO of a marketing agency. His team creates thousands of articles a month. They were paying over $5,000/mo in API usage across different proprietary models.
+
+With AI Writing Agent:
+- Internal Docs ingested via **Local RAG**
+- **Ollama Offline Mode** running local Llama 3.3 instances
+- **Total:** $0
+
+> "The ability to run local models connected to our proprietary knowledge base at exactly zero variable cost has transformed our agency's profitability." - Marcus T.
+
 ---
 
 ## How to Get Started (5 Minutes)
