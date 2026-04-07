@@ -37,6 +37,11 @@ I built [AI Writing Agent](https://github.com/irfancode/ai-writing-agent-v2 beca
 
 ---
 
+## 🎥 Watch it in Action (Zero-Config Setup)
+![Setup Showcase](../demo.gif)
+
+---
+
 ## But Does It Actually Work?
 
 Short answer: **Yes. Beautifully.**

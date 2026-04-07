@@ -19,6 +19,11 @@
 
 ---
 
+## 🎥 See it in Action
+![Setup Showcase](demo.gif)
+
+---
+
 ## 🌐 Live Demo
 
 **Visit our website:** https://irfancode.github.io
