@@ -30,4 +30,8 @@ src/core/providers/registry.py
 src/core/providers/vllm.py
 src/core/rag/__init__.py
 src/core/rag/loader.py
+src/gui/__init__.py
+src/gui/main.py
+src/tui/__init__.py
+src/tui/main.py
 tests/test_core.py

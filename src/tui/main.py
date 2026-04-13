@@ -339,8 +339,22 @@ class AITuiApp(App):
 
 def run_tui():
     """Run the TUI application"""
+    import sys
     app = AITuiApp()
-    app.run()
+    # Textual 8+ handles this better, but ensure we don't conflict with existing loop
+    try:
+        app.run()
+    except RuntimeError as e:
+        if "asyncio.run() cannot be called from a running event loop" in str(e):
+            # Fall back: run in separate thread
+            import threading
+            def run_in_thread():
+                app.run()
+            t = threading.Thread(target=run_in_thread)
+            t.start()
+            t.join()
+        else:
+            raise
 
 
 if __name__ == "__main__":

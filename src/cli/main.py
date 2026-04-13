@@ -228,12 +228,20 @@ async def main():
     
     # Handle interface launching
     if args.command == "gui":
+        import threading
         from ..gui.main import run_gui
-        run_gui()
+        
+        def run_gui_thread():
+            run_gui()
+        
+        thread = threading.Thread(target=run_gui_thread)
+        thread.start()
         return
     
     if args.command == "tui":
         from ..tui.main import run_tui
+        import sys
+        sys.argv = ["tui"]
         run_tui()
         return
     
