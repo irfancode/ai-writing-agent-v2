@@ -35,12 +35,17 @@ class AIGUI:
         if not CTK_AVAILABLE:
             raise ImportError("tkinter/customtkinter not available. Install with: brew install python-tk")
         
+        # Important: macOS needs this for GUI apps
+        import os
+        os.environ['TK_SILENCE_DEPRECATION'] = '1'
+        
         ctk.set_appearance_mode("dark")
         ctk.set_default_color_theme("blue")
         
         self.root = ctk.CTk()
         self.root.title("AI Writing Agent")
         self.root.geometry("1200x800")
+        self.root.protocol("WM_DELETE_WINDOW", self.on_close)
         
         self.registry = None
         self.orchestrator = None
@@ -185,9 +190,12 @@ class AIGUI:
         self.set_mode(WritingMode.WRITE)
     
     def bind_keys(self):
-        self.root.bind("<Control-q>", lambda e: self.root.quit())
-        self.root.bind("<Control-n>", lambda e: self.new_session())
+        self.root.bind("<Command-q>", lambda e: self.on_close())
+        self.root.bind("<Command-n>", lambda e: self.new_session())
         self.root.bind("<Return>", lambda e: self.generate_content() if not self.is_generating else None)
+    
+    def on_close(self):
+        self.root.quit()
     
     def set_mode(self, mode: str):
         self.current_mode = mode
