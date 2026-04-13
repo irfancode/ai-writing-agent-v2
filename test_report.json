@@ -1,18 +1,18 @@
 {
-  "timestamp": "2026-04-06T21:38:24.434919",
+  "timestamp": "2026-04-13T11:26:28.927136",
   "mode": "mock",
   "summary": {
     "total": 33,
     "passed": 33,
     "failed": 0,
     "success_rate": "100.0%",
-    "duration_ms": 2129.392147064209
+    "duration_ms": 2138.787031173706
   },
   "test_results": [
     {
       "test_name": "Provider Registration",
       "status": "PASS",
-      "duration_ms": 0.0021457672119140625,
+      "duration_ms": 0.0019073486328125,
       "output": "Registered providers: ['mock']",
       "expected_behavior": "At least one provider registered",
       "actual_behavior": "Registered: mock",
@@ -48,7 +48,7 @@
     {
       "test_name": "Write: haiku",
       "status": "PASS",
-      "duration_ms": 101.22895240783691,
+      "duration_ms": 101.18794441223145,
       "output": "Generated 79 chars",
       "expected_behavior": "Content generated with haiku structure",
       "actual_behavior": "Content length: 79, Structured: False",
@@ -57,7 +57,7 @@
     {
       "test_name": "Write: blog",
       "status": "PASS",
-      "duration_ms": 101.31192207336426,
+      "duration_ms": 101.15790367126465,
       "output": "Generated 873 chars",
       "expected_behavior": "Content generated with blog structure",
       "actual_behavior": "Content length: 873, Structured: True",
@@ -66,7 +66,7 @@
     {
       "test_name": "Write: email",
       "status": "PASS",
-      "duration_ms": 101.37224197387695,
+      "duration_ms": 101.27782821655273,
       "output": "Generated 434 chars",
       "expected_behavior": "Content generated with email structure",
       "actual_behavior": "Content length: 434, Structured: True",
@@ -75,7 +75,7 @@
     {
       "test_name": "Write: linkedin",
       "status": "PASS",
-      "duration_ms": 101.36294364929199,
+      "duration_ms": 102.15377807617188,
       "output": "Generated 873 chars",
       "expected_behavior": "Content generated with linkedin structure",
       "actual_behavior": "Content length: 873, Structured: True",
@@ -84,7 +84,7 @@
     {
       "test_name": "Write: technical",
       "status": "PASS",
-      "duration_ms": 101.27472877502441,
+      "duration_ms": 100.5697250366211,
       "output": "Generated 915 chars",
       "expected_behavior": "Content generated with technical structure",
       "actual_behavior": "Content length: 915, Structured: True",
@@ -93,7 +93,7 @@
     {
       "test_name": "Think: outline",
       "status": "PASS",
-      "duration_ms": 101.41420364379883,
+      "duration_ms": 101.33695602416992,
       "output": "Generated 20 chars, 20 steps",
       "expected_behavior": "Structured thinking output for outline",
       "actual_behavior": "Content: 20 chars, Steps: 20",
@@ -102,7 +102,7 @@
     {
       "test_name": "Think: character",
       "status": "PASS",
-      "duration_ms": 101.52888298034668,
+      "duration_ms": 101.55415534973145,
       "output": "Generated 42 chars, 21 steps",
       "expected_behavior": "Structured thinking output for character",
       "actual_behavior": "Content: 42 chars, Steps: 21",
@@ -111,7 +111,7 @@
     {
       "test_name": "Think: research",
       "status": "PASS",
-      "duration_ms": 101.61995887756348,
+      "duration_ms": 106.4908504486084,
       "output": "Generated 31 chars, 21 steps",
       "expected_behavior": "Structured thinking output for research",
       "actual_behavior": "Content: 31 chars, Steps: 21",
@@ -120,7 +120,7 @@
     {
       "test_name": "Edit: grammar",
       "status": "PASS",
-      "duration_ms": 101.52506828308105,
+      "duration_ms": 101.08089447021484,
       "output": "Edited: 7 changes",
       "expected_behavior": "Text edited with reasoning",
       "actual_behavior": "Changed: True, Has reasoning: False",
@@ -129,7 +129,7 @@
     {
       "test_name": "Edit: professional",
       "status": "PASS",
-      "duration_ms": 101.0129451751709,
+      "duration_ms": 101.47809982299805,
       "output": "Edited: 12 changes",
       "expected_behavior": "Text edited with reasoning",
       "actual_behavior": "Changed: True, Has reasoning: False",
@@ -138,7 +138,7 @@
     {
       "test_name": "Edit: clarity",
       "status": "PASS",
-      "duration_ms": 100.85511207580566,
+      "duration_ms": 101.90510749816895,
       "output": "Edited: 2 changes",
       "expected_behavior": "Text edited with reasoning",
       "actual_behavior": "Changed: True, Has reasoning: False",
@@ -147,7 +147,7 @@
     {
       "test_name": "Style: narrative",
       "status": "PASS",
-      "duration_ms": 101.45211219787598,
+      "duration_ms": 101.24683380126953,
       "output": "Generated 642 chars",
       "expected_behavior": "Content generated in specified style",
       "actual_behavior": "Style: narrative, Length: 642",
@@ -156,7 +156,7 @@
     {
       "test_name": "Style: technical",
       "status": "PASS",
-      "duration_ms": 101.26590728759766,
+      "duration_ms": 101.24707221984863,
       "output": "Generated 915 chars",
       "expected_behavior": "Content generated in specified style",
       "actual_behavior": "Style: technical, Length: 915",
@@ -165,7 +165,7 @@
     {
       "test_name": "Style: marketing",
       "status": "PASS",
-      "duration_ms": 101.33814811706543,
+      "duration_ms": 101.33981704711914,
       "output": "Generated 642 chars",
       "expected_behavior": "Content generated in specified style",
       "actual_behavior": "Style: marketing, Length: 642",
@@ -174,7 +174,7 @@
     {
       "test_name": "Style: concise",
       "status": "PASS",
-      "duration_ms": 101.40514373779297,
+      "duration_ms": 101.29380226135254,
       "output": "Generated 642 chars",
       "expected_behavior": "Content generated in specified style",
       "actual_behavior": "Style: concise, Length: 642",
@@ -183,7 +183,7 @@
     {
       "test_name": "Style: creative",
       "status": "PASS",
-      "duration_ms": 101.3801097869873,
+      "duration_ms": 100.92496871948242,
       "output": "Generated 642 chars",
       "expected_behavior": "Content generated in specified style",
       "actual_behavior": "Style: creative, Length: 642",
@@ -192,7 +192,7 @@
     {
       "test_name": "Style: formal",
       "status": "PASS",
-      "duration_ms": 101.31382942199707,
+      "duration_ms": 101.73416137695312,
       "output": "Generated 642 chars",
       "expected_behavior": "Content generated in specified style",
       "actual_behavior": "Style: formal, Length: 642",
@@ -201,7 +201,7 @@
     {
       "test_name": "Style: casual",
       "status": "PASS",
-      "duration_ms": 101.24015808105469,
+      "duration_ms": 101.64403915405273,
       "output": "Generated 177 chars",
       "expected_behavior": "Content generated in specified style",
       "actual_behavior": "Style: casual, Length: 177",
@@ -210,7 +210,7 @@
     {
       "test_name": "Style: academic",
       "status": "PASS",
-      "duration_ms": 101.26996040344238,
+      "duration_ms": 100.67200660705566,
       "output": "Generated 642 chars",
       "expected_behavior": "Content generated in specified style",
       "actual_behavior": "Style: academic, Length: 642",
@@ -219,7 +219,7 @@
     {
       "test_name": "Pipeline: Think + Write",
       "status": "PASS",
-      "duration_ms": 202.94523239135742,
+      "duration_ms": 206.82668685913086,
       "output": "Think: 20 chars, Draft: 486 chars",
       "expected_behavior": "Both thinking and draft content generated",
       "actual_behavior": "Think: 20, Draft: 486, Steps: 20",
@@ -228,7 +228,7 @@
     {
       "test_name": "Memory: Add & Retrieve Character",
       "status": "PASS",
-      "duration_ms": 0.06914138793945312,
+      "duration_ms": 0.07009506225585938,
       "output": "Character retrieved: Sarah Chen",
       "expected_behavior": "Character added and retrieved",
       "actual_behavior": "Character: Sarah Chen",
@@ -273,7 +273,7 @@
     {
       "test_name": "Model: Thinking Mode",
       "status": "PASS",
-      "duration_ms": 0.04410743713378906,
+      "duration_ms": 0.03504753112792969,
       "output": "Selected: mock/mixtral-8x7b",
       "expected_behavior": "Model selected for thinking",
       "actual_behavior": "Model: mock/mixtral-8x7b",
@@ -300,7 +300,7 @@
     {
       "test_name": "Provider: mock",
       "status": "PASS",
-      "duration_ms": 0.007867813110351562,
+      "duration_ms": 0.012159347534179688,
       "output": "Status: HEALTHY",
       "expected_behavior": "Provider health checked",
       "actual_behavior": "Healthy: True",

@@ -1,12 +1,9 @@
 """CLI - Command Line Interface for AI Writing Agent"""
 
 import asyncio
-import sys
-from typing import Optional
 import argparse
-import os
 
-from ..core.providers.registry import init_registry, get_registry
+from ..core.providers.registry import init_registry
 from ..core.modes.orchestrator import DualModeOrchestrator
 from ..core.modes.thinking import ThinkingType
 from ..core.modes.non_thinking import WritingStyle
@@ -67,7 +64,7 @@ class CLI:
         
         if available:
             if "mock" in available:
-                print_success(f"Ready! (Demo mode - for real AI, set GROQ_API_KEY)")
+                print_success("Ready! (Demo mode - for real AI, set GROQ_API_KEY)")
             else:
                 print_success(f"Connected to: {', '.join(available)}")
         else:

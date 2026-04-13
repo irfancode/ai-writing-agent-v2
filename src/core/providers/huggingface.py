@@ -1,13 +1,14 @@
 """HuggingFace Provider - Access to Qwen3, DeepSeek-R1, and more"""
 
+import asyncio
 import os
 import time
 import json
-from typing import List, Optional, Dict, Any, AsyncIterator
+from typing import List, Optional, Dict, AsyncIterator
 import httpx
 
 from .base import (
-    ModelProvider, ModelConfig, GenerationResult, GenerationOptions,
+    ModelConfig, GenerationResult, GenerationOptions,
     ProviderType, ModelMode, ReasoningProvider, ReasoningStep
 )
 
@@ -228,7 +229,7 @@ class HuggingFaceProvider(ReasoningProvider):
                             latency_ms=(time.time() - start_time) * 1000,
                             warnings=["Model loaded after retry"],
                         )
-                    except:
+                    except Exception:
                         continue
             
             raise RuntimeError(f"HuggingFace API error: {e}")
@@ -284,7 +285,7 @@ class HuggingFaceProvider(ReasoningProvider):
                 )
                 for m in data.get("models", [])
             ]
-        except:
+        except Exception:
             return self.list_registered_models()
     
     async def health_check(self) -> bool:
@@ -292,7 +293,7 @@ class HuggingFaceProvider(ReasoningProvider):
         try:
             response = await self.client.get("/v1/models", timeout=10)
             return response.status_code == 200
-        except:
+        except Exception:
             return False
     
     async def generate_with_reasoning(
@@ -370,6 +371,3 @@ Think out loud, exploring different angles and approaches. Structure your thinki
     async def close(self):
         """Close the HTTP client"""
         await self.client.aclose()
-
-
-import asyncio

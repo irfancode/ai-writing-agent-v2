@@ -1,7 +1,7 @@
 # AI Writing Agent - Complete User Guide
 
 > **The Ultimate Open-Source AI Writing System for 2026**
-> Zero-cost, privacy-preserving, and works out-of-the-box
+> Zero-cost, privacy-preserving, and works out-of-the-box with zero configuration!
 
 ---
 
@@ -21,51 +21,54 @@
 
 ## Quick Start
 
-### Option 1: Zero-Config (No API Keys)
+### Option 1: Zero-Config with Ollama (Recommended - No API Keys!)
 
 ```bash
-# Clone the repository
-git clone https://github.com/irfancode/ai-writing-agent-v2git
-cd ai-writing-agent
+# Install Ollama (free, runs locally)
+brew install ollama  # macOS
+curl -fsSL https://ollama.com/install.sh | sh  # Linux
 
-# Create virtual environment
-python3 -m venv venv
-source venv/bin/activate
+# Pull a lightweight model (~1.3GB)
+ollama pull llama3.2:1b
 
-# Install dependencies
+# Clone and run
+git clone https://github.com/irfancode/ai-writing-agent-v2
+cd ai-writing-agent-v2
+python3 -m venv venv && source venv/bin/activate
 pip install -e .
 
-# Run immediately!
+# Run - it auto-detects Ollama!
 python3 -m src.cli.main write "Write a haiku about AI"
 ```
 
 **Output:**
 ```
-==============================================================
-                    Generated Content
-==============================================================
+✓ Connected to Ollama (Local AI - No API keys required!)
 
-Code dreams in silicon,
-Neural pathways light the way,
-Machine finds its voice.
+Generated Content:
+==================
 
-==============================================================
+Deep blue horizon,
+Waves crash on the sandy shore,
+Nature's endless song.
 ```
 
-### Option 2: With Free API Keys (More Power)
+### Option 2: No Ollama? Still Works!
+
+If you don't have Ollama installed, the app automatically falls back to demo mode - still functional for testing!
+
+### Option 3: With Free API Keys (Optional - More Power)
 
 Get free keys from:
-- **Groq**: https://console.groq.com/keys
-- **Together AI**: https://api.together.xyz/settings/api-keys
+- **Groq**: https://console.groq.com/keys (free tier)
+- **Together AI**: https://api.together.xyz/settings/api-keys (free tier)
 
 ```bash
 export GROQ_API_KEY="gsk_your_key_here"
 export TOGETHER_API_KEY="tk_your_key_here"
 
-# Now you have access to:
-# - Llama 3.3 70B (Groq - fastest)
-# - Qwen3 32B (Together - best reasoning)
-# - DeepSeek-R1 32B (Together - best for planning)
+# The app automatically uses the best available option:
+# 1. Ollama (local) → 2. Free APIs → 3. Demo mode
 ```
 
 ---

@@ -1,13 +1,11 @@
 """Thinking Mode - Deep planning and reasoning for writing"""
 
-from typing import List, Optional, Dict, Any, AsyncIterator
+from typing import List, Optional, Dict, Any
 from dataclasses import dataclass, field
 from enum import Enum
-import json
-import asyncio
 
 from ..providers.registry import ModelRegistry
-from ..providers.base import GenerationOptions, ModelMode, ReasoningStep, GenerationResult
+from ..providers.base import GenerationOptions, ModelMode, ReasoningStep
 
 
 class ThinkingType(Enum):
@@ -291,7 +289,7 @@ Show your complete reasoning process.""",
         context = {"text": text, "author": author_name}
         
         request = ThinkingRequest(
-            task=f"Analyze the style of this writing" + (f" by {author_name}" if author_name else ""),
+            task="Analyze the style of this writing" + (f" by {author_name}" if author_name else ""),
             thinking_type=ThinkingType.STYLE_ANALYSIS,
             context=context,
             depth="deep",

@@ -3,12 +3,11 @@
 from typing import List, Optional, Dict, Any, AsyncIterator, Callable
 from dataclasses import dataclass, field
 from enum import Enum
-import asyncio
 
 from ..providers.registry import ModelRegistry
-from ..providers.base import GenerationOptions, ModelMode
+from ..providers.base import ModelMode
 from ..memory.context import HighContextMemory
-from .thinking import ThinkingMode, ThinkingType, ThinkingRequest, ThinkingResult
+from .thinking import ThinkingMode, ThinkingType, ThinkingRequest
 from .non_thinking import NonThinkingMode, WritingStyle, DraftRequest
 from ..logger import get_logger
 
@@ -283,7 +282,7 @@ Write in the specified style, following the structure provided."""
         
         for i in range(iterations):
             # Think about improvements
-            think_result = await self.think(
+            _think_result = await self.think(
                 prompt=f"Analyze this content and suggest improvements:\n\n{current}",
                 thinking_type=ThinkingType.PROBLEM_SOLVING,
                 depth="medium",

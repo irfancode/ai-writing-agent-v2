@@ -1,9 +1,8 @@
 """Non-Thinking Mode - Fast drafting and editing"""
 
-from typing import List, Optional, Dict, Any, AsyncIterator, Callable
+from typing import List, Optional, Dict, Any, AsyncIterator
 from dataclasses import dataclass, field
 from enum import Enum
-import asyncio
 
 from ..providers.registry import ModelRegistry
 from ..providers.base import GenerationOptions, ModelMode
@@ -34,16 +33,6 @@ class DraftRequest:
 
 
 @dataclass
-class EditResult:
-    """Result from editing"""
-    original: str
-    edited: str
-    changes: List[EditChange]
-    reasoning: Optional[str] = None
-    metadata: Dict[str, Any] = field(default_factory=dict)
-
-
-@dataclass
 class EditChange:
     """A single change made during editing"""
     change_type: str  # "grammar", "clarity", "style", "tone", "structure"
@@ -52,6 +41,16 @@ class EditChange:
     reason: str
     position: int  # Character position
     confidence: float = 0.9
+
+
+@dataclass
+class EditResult:
+    """Result from editing"""
+    original: str
+    edited: str
+    changes: List[EditChange]
+    reasoning: Optional[str] = None
+    metadata: Dict[str, Any] = field(default_factory=dict)
 
 
 class NonThinkingMode:
@@ -246,7 +245,6 @@ Text to edit:
         words = text.split()
         chunk_size = interval
         
-        chunks = []
         current_pos = 0
         
         for i in range(0, len(words), chunk_size):
@@ -442,7 +440,7 @@ Only suggest if genuinely needed."""
                         position=pos,
                         confidence=0.8,
                     ))
-                except:
+                except Exception:
                     continue
         
         return suggestions

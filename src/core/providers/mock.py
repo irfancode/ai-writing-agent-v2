@@ -2,12 +2,12 @@
 
 import time
 import asyncio
-from typing import List, Optional, Dict, Any, AsyncIterator
+from typing import List, Optional, Dict, AsyncIterator
 from dataclasses import dataclass
 
 from .base import (
     ModelProvider, ModelConfig, GenerationResult, GenerationOptions,
-    ProviderType, ModelMode, ReasoningStep
+    ProviderType, ModelMode
 )
 
 

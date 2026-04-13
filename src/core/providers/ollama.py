@@ -44,10 +44,53 @@ class OllamaProvider(ModelProvider):
             timeout=default_timeout,
         )
         
-        self._register_default_models()
+        # Load available models from Ollama
+        self._ollama_available_models = self._discover_ollama_models()
+        
+        # Build model list from available Ollama models + defaults
+        models = []
+        
+        # Add actually available models first
+        for ollama_name in self._ollama_available_models:
+            base = ollama_name.split(':')[0]
+            if 'llama' in base.lower():
+                mode = ModelMode.NON_THINKING
+            elif 'deepseek' in base.lower() or 'r1' in base.lower():
+                mode = ModelMode.THINKING
+            else:
+                mode = ModelMode.LOCAL
+            
+            models.append(ModelConfig(
+                id=ollama_name,
+                name=ollama_name.replace(':', ' ').title(),
+                mode=mode,
+                context_window=128000,
+                max_output_tokens=4096,
+                capabilities=["text"],
+                metadata={"provider": "ollama", "from_ollama": True},
+            ))
+        
+        # Only add defaults if no models available
+        if not models:
+            models = self._get_default_models()
+        
+        for model in models:
+            self.register_model(model)
     
-    def _register_default_models(self):
-        """Register popular Ollama models"""
+    def _discover_ollama_models(self) -> List[str]:
+        """Discover available models from local Ollama instance"""
+        try:
+            import httpx
+            response = httpx.get(f"{self.base_url}/api/tags", timeout=10)
+            if response.status_code == 200:
+                data = response.json()
+                return [m.get("name", "") for m in data.get("models", [])]
+        except Exception:
+            pass
+        return []
+    
+    def _get_default_models(self) -> List[ModelConfig]:
+        """Get default model configs (fallback when Ollama has no models)"""
         models = [
             ModelConfig(
                 id="gemma3:12b",
@@ -137,7 +180,26 @@ class OllamaProvider(ModelProvider):
         start_time = time.time()
         
         options = options or GenerationOptions()
-        model_config = self.get_model(model) or ModelConfig(id=model)
+        
+        # Resolve model to actual Ollama model name (handle :latest or no tag)
+        model_config = self.get_model(model)
+        if model_config:
+            ollama_model = model_config.id
+        else:
+            # Try to find a matching model by base name
+            base_name = model.split(':')[0] if ':' in model else model
+            for registered_model in self._models:
+                if registered_model.id.startswith(base_name):
+                    ollama_model = registered_model.id
+                    break
+            else:
+                # Check if it's available in Ollama directly
+                for ollama_name in self._ollama_available_models:
+                    if ollama_name.startswith(base_name):
+                        ollama_model = ollama_name
+                        break
+                else:
+                    ollama_model = model  # Use as-is
         
         # Build chat format for messages
         formatted_messages = []
@@ -157,16 +219,16 @@ class OllamaProvider(ModelProvider):
             })
         
         payload = {
-            "model": model,
+            "model": ollama_model,
             "messages": formatted_messages,
             "stream": False,
             "options": {
-                "temperature": options.temperature or model_config.temperature,
-                "num_predict": options.max_tokens or model_config.max_output_tokens,
-                "top_p": options.top_p or model_config.top_p,
-                "top_k": options.top_k or model_config.top_k,
-                "repeat_penalty": model_config.repeat_penalty,
-                "stop": options.stop or model_config.stop,
+                "temperature": options.temperature or (model_config.temperature if model_config else 0.7),
+                "num_predict": options.max_tokens or (model_config.max_output_tokens if model_config else 4096),
+                "top_p": options.top_p or (model_config.top_p if model_config else 0.9),
+                "top_k": options.top_k or (model_config.top_k if model_config else 40),
+                "repeat_penalty": model_config.repeat_penalty if model_config else 1.1,
+                "stop": options.stop or (model_config.stop if model_config else []),
             },
         }
         
@@ -182,7 +244,7 @@ class OllamaProvider(ModelProvider):
             
             return GenerationResult(
                 content=content,
-                model=model,
+                model=ollama_model,
                 provider=self.name,
                 usage={
                     "prompt_tokens": len(prompt.split()) * 1.3,
@@ -257,7 +319,7 @@ class OllamaProvider(ModelProvider):
                 ))
             
             return models
-        except:
+        except Exception:
             return self.list_registered_models()
     
     async def health_check(self) -> bool:
@@ -265,7 +327,7 @@ class OllamaProvider(ModelProvider):
         try:
             response = await self.client.get("/", timeout=5)
             return response.status_code == 200
-        except:
+        except Exception:
             return False
     
     async def pull_model(self, model: str) -> AsyncIterator[Dict[str, Any]]:

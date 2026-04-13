@@ -1,10 +1,8 @@
 """RAG System - Retrieval-Augmented Generation for local files"""
 
-import os
-from typing import List, Dict, Any, Optional, AsyncIterator
+from typing import List, Dict, Any, Optional
 from dataclasses import dataclass
 from pathlib import Path
-import asyncio
 import hashlib
 
 from ..providers.registry import ModelRegistry
@@ -224,7 +222,7 @@ class RAGRetriever:
                     emb = await ollama.create_embedding(text, self.embedding_model)
                     embeddings.append(emb)
                 return embeddings
-            except:
+            except Exception:
                 pass
         
         # Fallback: use simple hash-based pseudo-embeddings

@@ -1,6 +1,5 @@
 """vLLM Provider - Production-Grade High-Throughput Serving"""
 
-import os
 import time
 import json
 from typing import List, Optional, Dict, Any, AsyncIterator
@@ -8,7 +7,7 @@ import httpx
 
 from .base import (
     ModelProvider, ModelConfig, GenerationResult, GenerationOptions,
-    ProviderType, ModelMode
+    ProviderType
 )
 
 
@@ -161,7 +160,7 @@ class VLLMProvider(ModelProvider):
                 )
                 for m in data.get("data", [])
             ]
-        except:
+        except Exception:
             return []
     
     async def health_check(self) -> bool:
@@ -169,7 +168,7 @@ class VLLMProvider(ModelProvider):
         try:
             response = await self.client.get("/health", timeout=5)
             return response.status_code == 200
-        except:
+        except Exception:
             return False
     
     async def get_stats(self) -> Dict[str, Any]:
@@ -178,7 +177,7 @@ class VLLMProvider(ModelProvider):
             response = await self.client.get("/stats")
             response.raise_for_status()
             return response.json()
-        except:
+        except Exception:
             return {}
     
     async def close(self):

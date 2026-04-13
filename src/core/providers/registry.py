@@ -1,7 +1,6 @@
 """Model Registry - Central hub for all model providers"""
 
-import os
-from typing import Dict, List, Optional, Callable
+from typing import Dict, List, Optional
 from dataclasses import dataclass, field
 import asyncio
 
@@ -276,7 +275,7 @@ class ModelRegistry:
         for name, provider in self._providers.items():
             try:
                 results[name] = await provider.health_check()
-            except:
+            except Exception:
                 results[name] = False
         
         return results
@@ -301,43 +300,40 @@ def get_registry() -> ModelRegistry:
 
 
 def init_registry(config: Optional[Dict] = None) -> ModelRegistry:
-    """Initialize registry with providers - falls back to mock if no API keys"""
+    """Initialize registry with providers - auto-detects best available option"""
     registry = get_registry()
     
     if registry._providers:
         return registry
     
-    from .free import FreeProvider
+    from .ollama import OllamaProvider
     from .mock import MockProvider
-    from .huggingface import HuggingFaceProvider
     
-    groq_key = os.getenv("GROQ_API_KEY")
-    together_key = os.getenv("TOGETHER_API_KEY")
+    # Try Ollama first (no API key needed - fully local/private)
+    ollama_provider = OllamaProvider()
     
-    has_api_keys = bool(groq_key or together_key)
+    # Check if Ollama is running using synchronous HTTP check
+    import httpx
+    try:
+        response = httpx.get("http://localhost:11434/", timeout=5)
+        is_healthy = response.status_code == 200
+    except Exception:
+        is_healthy = False
     
-    if has_api_keys:
-        free_provider = FreeProvider()
-        registry.register_provider("free", free_provider, ProviderConfig(
-            provider_type=ProviderType.OPENAI,
+    if is_healthy:
+        registry.register_provider("ollama", ollama_provider, ProviderConfig(
+            provider_type=ProviderType.OLLAMA,
             enabled=True,
             priority=100,
         ))
+        print("✓ Connected to Ollama (Local AI - No API keys required!)")
     else:
+        # Fall back to mock for demo/testing
         mock_provider = MockProvider()
         registry.register_provider("mock", mock_provider, ProviderConfig(
             provider_type=ProviderType.OPENAI,
             enabled=True,
-            priority=100,
-        ))
-    
-    hf_api_key = os.getenv("HF_API_KEY")
-    if hf_api_key:
-        hf_provider = HuggingFaceProvider(api_key=hf_api_key)
-        registry.register_provider("huggingface", hf_provider, ProviderConfig(
-            provider_type=ProviderType.HUGGINGFACE,
-            enabled=True,
-            priority=30,
+            priority=50,
         ))
     
     return registry

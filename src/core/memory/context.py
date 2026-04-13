@@ -1,6 +1,6 @@
 """High-Context Memory - Long document memory for character traits, plot points, brand voice"""
 
-from typing import List, Dict, Any, Optional, Callable
+from typing import List, Dict, Any, Optional
 from dataclasses import dataclass, field
 from datetime import datetime
 from collections import defaultdict

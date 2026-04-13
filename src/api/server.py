@@ -1,13 +1,13 @@
 """API Server - FastAPI-based REST API"""
 
-import os
-import asyncio
 from typing import Optional, List, Dict, Any
 from contextlib import asynccontextmanager
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 import uvicorn
+import json
 
 from ..core.providers.registry import init_registry, get_registry
 from ..core.modes.orchestrator import DualModeOrchestrator
@@ -45,7 +45,35 @@ app.add_middleware(
 )
 
 
+# --- Enterprise Auth Middleware (Mock) ---
+@app.middleware("http")
+async def enterprise_auth_middleware(request: Request, call_next):
+    # Skip auth for public endpoints
+    if request.url.path in ["/api/v1/auth/login", "/", "/health", "/models"] or request.method == "OPTIONS":
+        return await call_next(request)
+        
+    auth_header = request.headers.get("Authorization")
+    if not auth_header or not auth_header.startswith("Bearer "):
+        request.state.user = {"role": "anonymous"}
+    else:
+        token = auth_header.split(" ")[1]
+        # Simulate Enterprise JWT decoding & RBAC
+        if token == "mock-admin-jwt":
+            request.state.user = {"role": "admin", "id": "admin-1"}
+        elif token == "mock-pro-jwt":
+            request.state.user = {"role": "pro", "id": "pro-1"}
+        else:
+            request.state.user = {"role": "user", "id": "user-1"}
+
+    response = await call_next(request)
+    return response
+
+
 # Request/Response Models
+class LoginRequest(BaseModel):
+    username: str
+    password: str
+
 class ThinkRequest(BaseModel):
     prompt: str
     thinking_type: str = "outline"
@@ -101,6 +129,17 @@ async def root():
         "version": "2.0.0",
         "status": "healthy",
     }
+
+
+@app.post("/api/v1/auth/login")
+async def login(request: LoginRequest):
+    """Mock Enterprise SSO endpoint"""
+    if request.username == "admin":
+        return {"token": "mock-admin-jwt", "role": "admin"}
+    elif request.username == "pro":
+        return {"token": "mock-pro-jwt", "role": "pro"}
+    else:
+        return {"token": "mock-user-jwt", "role": "user"}
 
 
 @app.get("/health")
@@ -192,6 +231,43 @@ async def write(request: WriteRequest):
         "content": result.content,
         "metadata": result.metadata,
     }
+
+@app.post("/api/v1/write/stream")
+async def write_stream(request: WriteRequest, req: Request):
+    """Execute non-thinking mode for drafting with token streaming (SSE)"""
+    if not orchestrator:
+        raise HTTPException(status_code=500, detail="System not initialized")
+        
+    # Check RBAC (Mock)
+    user_role = getattr(req.state, "user", {}).get("role", "anonymous")
+    if user_role == "anonymous":
+        pass # In a real app we might reject this, but allowing for demo
+    
+    style_map = {
+        "narrative": WritingStyle.NARRATIVE,
+        "technical": WritingStyle.TECHNICAL,
+        "marketing": WritingStyle.MARKETING,
+        "concise": WritingStyle.CONCISE,
+        "creative": WritingStyle.CREATIVE,
+        "formal": WritingStyle.FORMAL,
+        "casual": WritingStyle.CASUAL,
+        "academic": WritingStyle.ACADEMIC,
+    }
+    
+    style = style_map.get(request.style, WritingStyle.NARRATIVE)
+    
+    async def event_generator():
+        try:
+            async for chunk in orchestrator.stream_write(
+                prompt=request.prompt,
+                style=style,
+            ):
+                if chunk:
+                    yield f"data: {json.dumps({'content': chunk})}\n\n"
+        except Exception as e:
+            yield f"data: {json.dumps({'error': str(e)})}\n\n"
+            
+    return StreamingResponse(event_generator(), media_type="text/event-stream")
 
 
 @app.post("/api/v1/edit")

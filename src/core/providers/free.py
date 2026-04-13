@@ -3,13 +3,12 @@
 import os
 import time
 import json
-from typing import List, Optional, Dict, Any, AsyncIterator
+from typing import List, Optional, Dict, AsyncIterator
 from dataclasses import dataclass
 import httpx
-import asyncio
 
 from .base import (
-    ModelProvider, ModelConfig, GenerationResult, GenerationOptions,
+    ModelConfig, GenerationResult, GenerationOptions,
     ProviderType, ModelMode, ReasoningProvider, ReasoningStep
 )
 
@@ -323,7 +322,7 @@ class FreeProvider(ReasoningProvider):
                 )
                 if response.status_code < 500:
                     return True
-            except:
+            except Exception:
                 continue
         return False
     
@@ -349,7 +348,7 @@ class FreeProvider(ReasoningProvider):
                 )
                 if response.status_code < 500:
                     return provider_name
-            except:
+            except Exception:
                 continue
         
         return None

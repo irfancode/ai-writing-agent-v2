@@ -1,12 +1,12 @@
 """Multi-Agent System - Draft, Edit, and Polish agents working together"""
 
-from typing import List, Optional, Dict, Any, Callable, AsyncIterator
+import asyncio
+from typing import List, Optional, Dict, Any, AsyncIterator
 from dataclasses import dataclass, field
 from enum import Enum
-import asyncio
 
 from ..providers.registry import ModelRegistry
-from ..providers.base import GenerationOptions, ModelMode
+from ..providers.base import GenerationOptions
 from ..memory.context import HighContextMemory
 from ..modes.non_thinking import WritingStyle
 

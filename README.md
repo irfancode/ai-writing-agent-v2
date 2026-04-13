@@ -132,44 +132,45 @@ Based on latest benchmarks, we support these models optimally:
 
 ---
 
-## 🚀 Quick Start (Zero-Cost Mode)
+## 🚀 Quick Start (Zero-Cost Mode - No API Keys!)
 
-### Zero-Config (No API Keys Required)
+### Zero-Config (Works Out of the Box!)
 
 ```bash
-# Install Ollama (truly free, runs locally)
+# Install Ollama (free, runs locally, no API keys needed)
 brew install ollama  # macOS
 curl -fsSL https://ollama.com/install.sh | sh  # Linux
 
-# Pull a model
-ollama pull llama3.3
+# Pull a model (llama3.2:1b is ~1.3GB, great for starters)
+ollama pull llama3.2:1b
 
 # Clone and run
-git clone https://github.com/irfancode/ai-writing-agent-v2git
-cd ai-writing-agent
+git clone https://github.com/irfancode/ai-writing-agent-v2
+cd ai-writing-agent-v2
 python3 -m venv venv && source venv/bin/activate
 pip install -e .
 
-# Run CLI (works immediately!)
+# Run CLI - it auto-detects Ollama!
 python3 -m src.cli.main write "Write a haiku about AI"
+
+# Or try thinking mode
+python3 -m src.cli.main think "Plan a blog post"
 ```
 
-### With Free Cloud APIs (More Power)
+### What Happens If No Ollama?
+
+If Ollama isn't installed, the app automatically falls back to demo mode - still works for testing!
+
+### With Free Cloud APIs (Optional - More Power)
 
 ```bash
-# Get free API keys:
+# Get free API keys for more powerful models:
 # - Groq: https://console.groq.com/keys (free tier)
 # - Together AI: https://api.together.xyz/settings/api-keys (free tier)
-# - HuggingFace: https://huggingface.co/settings/tokens (free tier)
 
 export GROQ_API_KEY="gsk_..."
-export TOGETHER_API_KEY="..."
 
-# Now you have access to:
-# - Llama 3.3 70B (Groq - fastest free tier)
-# - Qwen3 32B (Together AI)
-# - DeepSeek-R1 32B (Together AI)
-```
+# The app uses whichever is available: Ollama > Free APIs > Demo
 
 ### Full Installation (Docker & UV)
 
