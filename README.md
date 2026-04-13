@@ -144,17 +144,44 @@ curl -fsSL https://ollama.com/install.sh | sh  # Linux
 # Pull a model (llama3.2:1b is ~1.3GB, great for starters)
 ollama pull llama3.2:1b
 
-# Clone and run
+# Clone and Setup
+
+```bash
 git clone https://github.com/irfancode/ai-writing-agent-v2
 cd ai-writing-agent-v2
-python3 -m venv venv && source venv/bin/activate
+
+# Create and activate virtual environment
+python3 -m venv .venv
+source .venv/bin/activate
+
+# Install dependencies
 pip install -e .
 
-# Run CLI - it auto-detects Ollama!
-python3 -m src.cli.main write "Write a haiku about AI"
+# Install Ollama (for local AI - no API keys needed!)
+brew install ollama
+ollama pull llama3.2:1b
+```
 
-# Or try thinking mode
-python3 -m src.cli.main think "Plan a blog post"
+## Usage (Recommended: Use run.sh)
+
+```bash
+# CLI Commands
+./run.sh write "Write a haiku"
+./run.sh think "Plan a blog post"
+./run.sh interactive
+
+# Launch GUI (Desktop App)
+./run.sh gui
+
+# Launch TUI (Terminal UI)
+./run.sh tui
+
+# Launch WebGUI (Browser)
+./run.sh web
+# Opens at http://localhost:5173
+
+# API Server only
+./run.sh server
 ```
 
 ### What Happens If No Ollama?
