@@ -172,6 +172,48 @@ export GROQ_API_KEY="gsk_..."
 
 # The app uses whichever is available: Ollama > Free APIs > Demo
 
+---
+
+## 🎨 Multiple Interfaces
+
+Choose your preferred way to use AI Writing Agent:
+
+### CLI (Command Line)
+```bash
+# Quick write
+python3 -m src.cli.main write "Write a haiku"
+
+# Think mode
+python3 -m src.cli.main think "Plan my blog post"
+
+# Interactive mode
+python3 -m src.cli.main interactive
+```
+
+### GUI (Desktop App - CustomTkinter)
+```bash
+python3 -m src.cli.main gui
+```
+Launches a beautiful dark-mode desktop application with all features.
+
+### TUI (Terminal UI - Textual)
+```bash
+python3 -m src.cli.main tui
+```
+Rich terminal interface with modern styling.
+
+### WebGUI (Browser)
+```bash
+# Start API server
+python3 -m src.api.server
+
+# In another terminal, start frontend
+cd frontend && npm run dev
+```
+Then open http://localhost:5173
+
+---
+
 ### Full Installation (Docker & UV)
 
 We use modern dependency management (`pyproject.toml`) and offer instant dockerization.

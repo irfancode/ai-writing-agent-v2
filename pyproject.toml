@@ -20,6 +20,14 @@ dependencies = [
     "pypdf>=4.0.0",
     "python-docx>=1.0.0",
     "loguru>=0.7.2",
+    "textual>=8.0.0",
+    "customtkinter>=5.0.0",
+    "vue>=3.4.0",
+    "vue-router>=4.2.0",
+    "pinia>=2.1.0",
+    "axios>=1.6.0",
+    "marked>=12.0.0",
+    "highlight.js>=11.9.0",
 ]
 
 [project.optional-dependencies]
@@ -30,6 +38,13 @@ dev = [
     "ruff>=0.2.0",
     "black>=24.0.0",
     "pre-commit>=3.6.0"
+]
+gui = [
+    "customtkinter>=5.0.0",
+]
+
+tui = [
+    "textual>=8.0.0",
 ]
 
 [build-system]

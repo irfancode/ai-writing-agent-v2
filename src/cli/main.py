@@ -189,6 +189,7 @@ Commands:
 
 async def main():
     parser = argparse.ArgumentParser(description="AI Writing Agent CLI")
+    parser.add_argument("--version", action="version", version="2.0.0")
     subparsers = parser.add_subparsers(dest="command", help="Commands")
     
     # Think command
@@ -217,9 +218,24 @@ async def main():
     subparsers.add_parser("interactive", help="Interactive mode")
     
     # Models
-    subparsers.add_parser("models", help="List models")
+    subparsers.add_parser("models", help="List available models")
+    
+    # Interface commands
+    subparsers.add_parser("gui", help="Launch Desktop GUI")
+    subparsers.add_parser("tui", help="Launch Terminal UI")
     
     args = parser.parse_args()
+    
+    # Handle interface launching
+    if args.command == "gui":
+        from ..gui.main import run_gui
+        run_gui()
+        return
+    
+    if args.command == "tui":
+        from ..tui.main import run_tui
+        run_tui()
+        return
     
     cli = CLI()
     await cli.initialize()
