@@ -10,12 +10,12 @@
 
 | Document | Description |
 |----------|-------------|
-| [🚀 Quick Start](USER_GUIDE.md#quick-start) | Get running in 5 minutes |
+| [🚀 Quick Start](USER_GUIDE.md#quick-start) | Get running in 2 minutes |
 | [📖 User Guide](USER_GUIDE.md) | Complete command reference |
 | [✨ Feature Showcase](FEATURE_SHOWCASE.md) | Visual examples of all features |
 | [📝 Blog Post](BLOG_POST.md) | Why AI Writing Agent changes everything |
 | [🔑 API Keys Setup](API_KEYS.md) | Free API configuration guide |
-| [🧪 Test Report](TEST_REPORT.md) | 33 tests, 100% passing |
+| [🧪 Test Report](TEST_REPORT.md) | Tests, 100% passing |
 | [🐛 Troubleshooting](USER_GUIDE.md#troubleshooting) | Common issues and solutions |
 
 ---
@@ -30,6 +30,11 @@ AI Writing Agent is an **open-source, zero-cost** AI writing system that combine
 - 🔒 **Privacy First** - Run locally with Ollama
 - 🔄 **Multi-Provider** - Groq, Together AI, HuggingFace, Ollama
 - 📊 **8 Writing Styles** - Narrative, Technical, Marketing, and more
+- 🎯 **Brand Voice DNA** - Create your unique voice profile
+- 📊 **Quality Scoring** - Analyze readability, engagement, SEO
+- 📝 **Version History** - Track and rollback changes
+- 📦 **Format Presets** - 11 output formats (blog, LinkedIn, email, etc.)
+- 🏥 **Health Dashboard** - Real-time provider monitoring
 
 ---
 
@@ -50,17 +55,26 @@ AI Writing Agent is an **open-source, zero-cost** AI writing system that combine
 
 ## Getting Started
 
-### Option 1: Zero-Config (No API Keys)
+### Option 1: One-Command Setup (Recommended)
 
 ```bash
-git clone https://github.com/irfancode/ai-writing-agent-v2git
-cd ai-writing-agent
+git clone https://github.com/irfancode/ai-writing-agent-v2
+cd ai-writing-agent-v2
+./run.sh setup
+./run.sh write "Write a haiku about AI"
+```
+
+### Option 2: Zero-Config (No API Keys)
+
+```bash
+git clone https://github.com/irfancode/ai-writing-agent-v2
+cd ai-writing-agent-v2
 python3 -m venv venv && source venv/bin/activate
 pip install -e .
 python3 -m src.cli.main write "Write a haiku about AI"
 ```
 
-### Option 2: With Free API Keys (Recommended)
+### Option 3: With Free API Keys (More Power)
 
 Get free keys:
 - **Groq**: https://console.groq.com/keys (14,400 req/day free)

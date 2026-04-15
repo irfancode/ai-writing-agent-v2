@@ -2,12 +2,19 @@
 
 import asyncio
 import argparse
+import os
+import sys
 
 from ..core.providers.registry import init_registry
 from ..core.modes.orchestrator import DualModeOrchestrator
 from ..core.modes.thinking import ThinkingType
 from ..core.modes.non_thinking import WritingStyle
 from ..core.memory.context import HighContextMemory
+from ..core.output_formatter import OutputFormat, OutputFormatter
+from ..core.quality_scorer import QualityScorer
+from ..core.brand_voice import BrandVoiceAnalyzer
+from ..core.version_history import VersionHistory
+from ..core.template_library import TemplateLibrary
 from ..core.logger import get_logger
 
 logger = get_logger()
@@ -178,10 +185,22 @@ class CLI:
         print("""
 Commands:
   write <prompt>       - Generate content
-  think <prompt>      - Deep thinking/planning
+  think <prompt>       - Deep thinking/planning
   edit <text>         - Edit existing content
   pipeline <topic>     - Think + write pipeline
+  format <prompt>      - Generate with format preset (blog, linkedin, etc.)
+  quality <text>      - Analyze content quality
+  voice create        - Create brand voice from samples
+  voice list          - List saved voices
+  template list       - List available templates
+  template apply     - Apply a template
+  version save        - Save content version
+  version list        - List versions
+  version rollback   - Rollback to version
   models              - List available models
+  interactive         - Interactive mode
+  gui                 - Launch Desktop GUI
+  tui                 - Launch Terminal UI
   help                - Show this help
   exit                - Exit
         """)
@@ -224,6 +243,40 @@ async def main():
     subparsers.add_parser("gui", help="Launch Desktop GUI")
     subparsers.add_parser("tui", help="Launch Terminal UI")
     
+    # New enhanced commands
+    format_parser = subparsers.add_parser("format", help="Generate content with format preset")
+    format_parser.add_argument("prompt", help="Writing prompt")
+    format_parser.add_argument("--format", "-f", default="blog_post", 
+                                choices=["blog_post", "linkedin_post", "email", "twitter_thread", 
+                                        "landing_page", "product_desc", "press_release", "newsletter",
+                                        "case_study", "how_to_guide", "faq"])
+    
+    quality_parser = subparsers.add_parser("quality", help="Score content quality")
+    quality_parser.add_argument("text", help="Text to analyze")
+    quality_parser.add_argument("--seo", action="store_true", help="Include SEO scoring")
+    
+    voice_parser = subparsers.add_parser("voice", help="Brand voice DNA")
+    voice_parser.add_argument("action", choices=["create", "list", "use"], help="Voice action")
+    voice_parser.add_argument("--name", help="Voice profile name")
+    voice_parser.add_argument("--samples", nargs="*", help="Sample texts for analysis")
+    
+    template_parser = subparsers.add_parser("template", help="Template library")
+    template_parser.add_argument("action", choices=["list", "apply"], help="Template action")
+    template_parser.add_argument("--id", help="Template ID")
+    template_parser.add_argument("--var", action="append", help="Variables (key=value)")
+    
+    version_parser = subparsers.add_parser("version", help="Version history")
+    version_parser.add_argument("action", choices=["save", "list", "rollback"], help="Version action")
+    version_parser.add_argument("--doc", default="default", help="Document ID")
+    version_parser.add_argument("--version-id", help="Version ID to rollback to")
+    version_parser.add_argument("--content", help="Content to save")
+    
+    # Health check command
+    subparsers.add_parser("health", help="Check provider status")
+    
+    # Onboarding
+    subparsers.add_parser("onboard", help="Interactive onboarding wizard")
+    
     args = parser.parse_args()
     
     # Handle interface launching
@@ -262,6 +315,78 @@ async def main():
         models = cli.registry.list_models()
         for m in models[:15]:
             print(f"{m.id} ({m.mode.value})")
+    elif args.command == "format":
+        from ..core.output_formatter import OutputFormat
+        format_enum = OutputFormat(args.format)
+        formatted_prompt = OutputFormatter.format_prompt(args.prompt, format_enum)
+        await cli.write(formatted_prompt, args.style)
+    elif args.command == "quality":
+        scorer = QualityScorer()
+        score = scorer.score(args.text, args.seo)
+        print(scorer.format_report(score))
+    elif args.command == "voice":
+        if args.action == "list":
+            analyzer = BrandVoiceAnalyzer()
+            voices = analyzer.list_voices()
+            if voices:
+                print("Saved voices:", ", ".join(voices))
+            else:
+                print("No voice profiles. Create one with: ./run.sh voice create --name myvoice --samples 'text1' 'text2'")
+        elif args.action == "create" and args.name and args.samples:
+            analyzer = BrandVoiceAnalyzer()
+            voice = analyzer.analyze(args.samples, args.name)
+            print(f"✓ Created voice profile: {voice.name}")
+            print(f"  Tone: {', '.join(voice.tone_markers)}")
+            print(f"  Style: {voice.sentence_patterns.get('pattern', 'medium')}-length sentences")
+        elif args.action == "use" and args.name:
+            analyzer = BrandVoiceAnalyzer()
+            voice = analyzer.get_voice(args.name)
+            if voice:
+                prompt = analyzer.generate_system_prompt(voice)
+                print(f"Using voice: {args.name}")
+                print(f"System prompt:\n{prompt}")
+            else:
+                print(f"Voice '{args.name}' not found")
+    elif args.command == "template":
+        if args.action == "list":
+            templates = TemplateLibrary.list_all()
+            print("\nAvailable Templates:")
+            for t in templates:
+                print(f"  {t['id']:20} - {t['name']}")
+                print(f"    {t['description']}")
+                print(f"    Variables: {', '.join(t['variables'])}")
+                print()
+        elif args.action == "apply" and args.id and args.var:
+            variables = {}
+            for v in args.var:
+                if "=" in v:
+                    key, val = v.split("=", 1)
+                    variables[key] = val
+            prompt = TemplateLibrary.apply_template(args.id, variables)
+            await cli.write(prompt, "narrative")
+    elif args.command == "version":
+        vh = VersionHistory()
+        if args.action == "save" and args.content:
+            version_id = vh.save_version(args.doc, args.content)
+            print(f"✓ Saved version: {version_id}")
+        elif args.action == "list":
+            versions = vh.list_versions(args.doc)
+            print(f"Versions for '{args.doc}':")
+            for v in versions:
+                print(f"  {v['version_id']} - {v['word_count']} words - {v.get('delta', 'initial')}")
+        elif args.action == "rollback" and args.version_id:
+            version_id = vh.rollback(args.doc, args.version_id)
+            print(f"✓ Rolled back to: {version_id}")
+    elif args.command == "health":
+        from ..core.health_dashboard import health_dashboard
+        health = await health_dashboard.check_all(cli.registry)
+        print(health_dashboard.format_status())
+        best = health_dashboard.get_best_provider()
+        if best:
+            print(f"\n✓ Best provider: {best}")
+    elif args.command == "onboard":
+        from ..cli.onboarding import run_onboarding
+        run_onboarding()
     else:
         parser.print_help()
 

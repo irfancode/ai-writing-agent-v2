@@ -10,8 +10,15 @@ src/__init__.py
 src/api/__init__.py
 src/api/server.py
 src/cli/main.py
+src/cli/onboarding.py
 src/core/__init__.py
+src/core/brand_voice.py
+src/core/health_dashboard.py
 src/core/logger.py
+src/core/output_formatter.py
+src/core/quality_scorer.py
+src/core/template_library.py
+src/core/version_history.py
 src/core/agents/__init__.py
 src/core/agents/multi_agent.py
 src/core/memory/__init__.py

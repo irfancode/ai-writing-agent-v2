@@ -11,6 +11,7 @@
 3. [Editing Examples](#editing-examples)
 4. [Pipeline Examples](#pipeline-examples)
 5. [Writing Styles Comparison](#writing-styles-comparison)
+6. [v2.0 New Features](#v20-new-features)
 
 ---
 
@@ -730,16 +731,195 @@ adapt to each student's needs...
 
 ---
 
+## v2.0 New Features
+
+### Brand Voice DNA
+
+**Command:**
+```bash
+./run.sh voice create --name mybrand --samples "Your best blog post" "Your best email" "Your best LinkedIn post"
+```
+
+**Output:**
+```
+✓ Created voice profile: mybrand
+  Tone: professional, confident
+  Style: medium-length sentences
+```
+
+Now all your content sounds like YOU, not generic AI.
+
+---
+
+### Quality Scoring
+
+**Command:**
+```bash
+./run.sh quality "Your content here..." --seo
+```
+
+**Output:**
+```
+🌟 Quality Grade: GOOD
+
+📊 Overall Score: 72/100
+
+Breakdown:
+  • Readability: 78/100
+  • Engagement: 65/100
+  • SEO: 75/100
+
+📝 Metrics:
+  • Words: 523
+  • Sentences: 12
+  • Avg Sentence: 43.6 words
+
+💡 Suggestions:
+  • Simplify sentences - aim for 15-20 words average
+  • Add more engaging hooks at the start
+  • Consider adding a call-to-action
+```
+
+---
+
+### Version History
+
+**Command:**
+```bash
+./run.sh version save --doc article-1 --content "My great article..."
+./run.sh version list --doc article-1
+./run.sh version rollback --doc article-1 --version-id v1_20260415
+```
+
+**Output:**
+```
+✓ Saved version: v2_20260415_143022
+Versions for 'article-1':
+  v2_20260415_143022 - 523 words - +45 words
+  v1_20260415_142015 - 478 words - initial
+✓ Rolled back to: v3_20260415_143045
+```
+
+---
+
+### Format Presets
+
+**Command:**
+```bash
+./run.sh format "Launching our new AI product" --format linkedin_post
+```
+
+**Output:**
+```
+🚀 Big News: We Just Launched [Product Name]!
+
+After months of development, I'm excited to share that...
+
+## What We Built
+[Product] solves [problem] by [solution]
+
+## Why This Matters
+[Industry context and opportunity]
+
+## Special Launch Offer
+[Offer details]
+
+Who's ready to [benefit]? 👇
+
+#ProductLaunch #Startup #Innovation
+```
+
+---
+
+### Template Library
+
+**Command:**
+```bash
+./run.sh template list
+```
+
+**Output:**
+```
+Available Templates:
+  blog-outline         - Blog Post Outline
+  product-launch       - Product Launch Email
+  linkedin-story       - LinkedIn Story Post
+  seo-article         - SEO Article
+  case-study           - Case Study
+  character-profile    - Character Profile
+  video-script         - Video Script
+  cold-email           - Cold Outreach Email
+  twitter-thread       - Twitter Thread
+  faq-section          - FAQ Section
+```
+
+Apply a template:
+```bash
+./run.sh template apply --id case-study --var client_name=AcmeCorp --var industry=SaaS --var results="50% faster"
+```
+
+---
+
+### Health Dashboard
+
+**Command:**
+```bash
+./run.sh health
+```
+
+**Output:**
+```
+🟢 Provider Status:
+  🟢 free: healthy (245ms)
+  🟢 ollama: healthy (1200ms) (default)
+
+✓ Best provider: free
+```
+
+---
+
+### One-Command Setup
+
+**Command:**
+```bash
+./run.sh setup
+```
+
+**Output:**
+```
+🚀 AI Writing Agent - Quick Setup
+==================================
+
+Step 1: Creating virtual environment...
+✓ Virtual environment created
+
+Step 2: Activating environment...
+✓ Activated
+
+Step 3: Installing dependencies...
+✓ Installed
+
+Step 4: Checking available AI providers...
+  ✓ Ollama detected (Local AI)
+
+Setup Complete!
+==================================
+```
+
+---
+
 ## Summary
 
 AI Writing Agent demonstrates:
 
-✅ **Versatility** - 8+ writing styles
+✅ **Versatility** - 8+ writing styles + 11 format presets
 ✅ **Depth** - Thinking mode for planning
 ✅ **Speed** - Sub-second responses on free tiers
-✅ **Quality** - Production-ready outputs
+✅ **Quality** - Built-in quality scoring
 ✅ **Cost** - 100% free tier compatible
 ✅ **Privacy** - Local models available
+✅ **Voice** - Brand Voice DNA feature
+✅ **Reliability** - Health dashboard monitoring
 
 ---
 

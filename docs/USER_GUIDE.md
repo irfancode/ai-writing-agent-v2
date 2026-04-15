@@ -10,12 +10,13 @@
 1. [Quick Start](#quick-start)
 2. [Installation](#installation)
 3. [CLI Commands](#cli-commands)
-4. [Features Overview](#features-overview)
-5. [Writing Styles](#writing-styles)
-6. [Thinking Mode](#thinking-mode)
-7. [Use Cases](#use-cases)
-8. [Troubleshooting](#troubleshooting)
-9. [API Keys Setup](#api-keys-setup)
+4. [New Features (v2.0)](#new-features-v20)
+5. [Features Overview](#features-overview)
+6. [Writing Styles](#writing-styles)
+7. [Thinking Mode](#thinking-mode)
+8. [Use Cases](#use-cases)
+9. [Troubleshooting](#troubleshooting)
+10. [API Keys Setup](#api-keys-setup)
 
 ---
 
@@ -252,7 +253,8 @@ think <prompt>      - Deep thinking/planning
 edit <text>          - Edit existing content
 pipeline <topic>     - Think + write pipeline
 models               - List available models
-help                 - Show this help
+health               - Check provider status
+onboard              - Run onboarding wizard
 exit                 - Exit
 ```
 
@@ -286,6 +288,102 @@ LOCAL MODELS (Ollama Required):
 
 ==============================================================
 ```
+
+---
+
+## New Features (v2.0)
+
+AI Writing Agent v2.0 introduces powerful new features to enhance your writing workflow:
+
+### 1. Brand Voice DNA
+Create a unique voice profile from your best content samples:
+
+```bash
+./run.sh voice create --name mybrand --samples "Your best blog post" "Your best email" "Your best LinkedIn post"
+./run.sh voice list
+./run.sh voice use --name mybrand
+```
+
+### 2. Output Format Presets
+Generate content in specific formats with built-in best practices:
+
+```bash
+./run.sh format "Write about AI" --format blog_post
+./run.sh format "Launch announcement" --format linkedin_post
+./run.sh format "Product features" --format landing_page
+./run.sh format "Press release" --format press_release
+./run.sh format "Case study" --format case_study
+```
+
+Available formats: `blog_post`, `linkedin_post`, `email`, `twitter_thread`, `landing_page`, `product_desc`, `press_release`, `newsletter`, `case_study`, `how_to_guide`, `faq`
+
+### 3. Quality Scoring
+Analyze your content for readability, engagement, and SEO:
+
+```bash
+./run.sh quality "Your content here..." --seo
+```
+
+This provides:
+- Readability score (Flesch-Kincaid)
+- Engagement metrics
+- SEO analysis (when --seo flag used)
+- Specific improvement suggestions
+
+### 4. Version History
+Save, track, and rollback content versions:
+
+```bash
+./run.sh version save --doc my-article --content "Your content here"
+./run.sh version list --doc my-article
+./run.sh version rollback --doc my-article --version-id v1_20240415_143022
+```
+
+### 5. Template Library
+Pre-built templates for common writing tasks:
+
+```bash
+./run.sh template list
+./run.sh template apply --id blog-outline --var topic=AI topic=Healthcare --var num_sections=5
+./run.sh template apply --id linkedin-story --var topic=My promotion
+```
+
+### 6. Health Dashboard
+Monitor provider status in real-time:
+
+```bash
+./run.sh health
+```
+
+Output shows:
+- Provider status (healthy/degraded/offline)
+- Latency for each provider
+- Best available provider
+
+### 7. Interactive Onboarding
+First-run wizard to personalize your experience:
+
+```bash
+./run.sh onboard
+```
+
+The wizard asks about:
+- Your writing type (Fiction, Technical, Marketing, Academic)
+- Experience level
+- Configures optimal settings
+
+### 8. One-Command Setup
+Get started in seconds:
+
+```bash
+./run.sh setup
+```
+
+This automatically:
+- Creates virtual environment
+- Installs dependencies
+- Detects available providers (Ollama, Groq, Together)
+- Shows current status
 
 ---
 

@@ -1,8 +1,8 @@
-# AI Writing Agent: The Last Writing Tool You'll Ever Need
+# AI Writing Agent v2.0: The Last Writing Tool You'll Ever Need
 
 **Stop Paying $49/month for AI Writing. Start Writing for Free.**
 
-*Published: April 6, 2026*
+*Published: April 15, 2026*
 
 ---
 
@@ -34,11 +34,62 @@ I built [AI Writing Agent](https://github.com/irfancode/ai-writing-agent-v2 beca
 - ✅ **100% Private** - Run locally with Ollama if you want
 - ✅ **100% Fast** - Uses Groq's free tier for sub-second responses
 - ✅ **100% Flexible** - Switch between providers automatically
+- ✅ **Brand Voice DNA** - Create your unique voice profile
+- ✅ **Quality Scoring** - Analyze readability, engagement, SEO
+- ✅ **Version History** - Track and rollback changes
 
 ---
 
 ## 🎥 Watch it in Action (Zero-Config Setup)
 ![Setup Showcase](../demo.gif)
+
+---
+
+## What's New in v2.0
+
+## What's New in v2.0
+
+The biggest update since launch brings features that teams actually pay for:
+
+### 🎯 Brand Voice DNA
+Upload 3 samples of your best writing → AI learns your style, vocabulary, tone → All future content matches YOUR voice.
+
+```bash
+./run.sh voice create --name mybrand --samples "Sample 1" "Sample 2" "Sample 3"
+```
+
+This is what agencies pay $100+/month for. Now free.
+
+### 📊 Quality Scoring
+Automatically analyze content for:
+- Readability (Flesch-Kincaid score)
+- Engagement factors
+- SEO optimization
+- Specific improvement suggestions
+
+```bash
+./run.sh quality "Your content..." --seo
+```
+
+### 📝 Version History
+Never lose your work again:
+- Automatic version tracking
+- Compare versions
+- One-click rollback
+
+### 📦 11 Output Format Presets
+Generate content in specific formats:
+- Blog posts, LinkedIn posts, Emails
+- Twitter threads, Landing pages
+- Case studies, Press releases
+- FAQs, How-to guides
+
+```bash
+./run.sh format "Launch announcement" --format linkedin_post
+```
+
+### 🏥 Health Dashboard
+Real-time provider monitoring - always know which AI backend is working.
 
 ---
 
@@ -158,16 +209,23 @@ With AI Writing Agent:
 
 ---
 
-## How to Get Started (5 Minutes)
+## How to Get Started (2 Minutes!)
 
-### Step 1: Clone the Repo
+### One-Command Setup
 
 ```bash
-git clone https://github.com/irfancode/ai-writing-agent-v2git
-cd ai-writing-agent
+git clone https://github.com/irfancode/ai-writing-agent-v2
+cd ai-writing-agent-v2
+./run.sh setup
 ```
 
-### Step 2: Install Dependencies
+That's it. The setup script:
+1. Creates virtual environment
+2. Installs dependencies
+3. Detects available providers
+4. Shows you exactly what's ready
+
+### Alternative: Manual Setup
 
 ```bash
 python3 -m venv venv
@@ -175,7 +233,7 @@ source venv/bin/activate
 pip install -e .
 ```
 
-### Step 3: (Optional) Get Free API Keys
+### (Optional) Get Free API Keys
 
 For maximum power, get free API keys:
 

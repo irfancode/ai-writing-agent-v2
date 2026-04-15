@@ -308,11 +308,10 @@ def init_registry(config: Optional[Dict] = None) -> ModelRegistry:
     
     from .ollama import OllamaProvider
     from .mock import MockProvider
+    from .free import FreeProvider
     
-    # Try Ollama first (no API key needed - fully local/private)
     ollama_provider = OllamaProvider()
     
-    # Check if Ollama is running using synchronous HTTP check
     import httpx
     try:
         response = httpx.get("http://localhost:11434/", timeout=5)
@@ -326,14 +325,46 @@ def init_registry(config: Optional[Dict] = None) -> ModelRegistry:
             enabled=True,
             priority=100,
         ))
-        print("✓ Connected to Ollama (Local AI - No API keys required!)")
+        print("✓ Connected to Ollama (Local AI)")
     else:
-        # Fall back to mock for demo/testing
-        mock_provider = MockProvider()
-        registry.register_provider("mock", mock_provider, ProviderConfig(
-            provider_type=ProviderType.OPENAI,
-            enabled=True,
-            priority=50,
-        ))
+        free_provider = FreeProvider()
+        
+        import asyncio
+        try:
+            loop = asyncio.get_event_loop()
+            if loop.is_running():
+                import nest_asyncio
+                nest_asyncio.apply()
+                loop = asyncio.new_event_loop()
+                asyncio.set_event_loop(loop)
+            
+            async def check_free():
+                return await free_provider.health_check()
+            
+            if asyncio.get_event_loop().is_running():
+                import concurrent.futures
+                with concurrent.futures.ThreadPoolExecutor() as pool:
+                    future = pool.submit(asyncio.run, check_free())
+                    free_healthy = future.result()
+            else:
+                free_healthy = asyncio.run(check_free())
+        except Exception:
+            free_healthy = False
+        
+        if free_healthy:
+            registry.register_provider("free", free_provider, ProviderConfig(
+                provider_type=ProviderType.OPENAI,
+                enabled=True,
+                priority=90,
+            ))
+            print("✓ Connected to Free Providers (Groq/Together)")
+        else:
+            mock_provider = MockProvider()
+            registry.register_provider("mock", mock_provider, ProviderConfig(
+                provider_type=ProviderType.OPENAI,
+                enabled=True,
+                priority=50,
+            ))
+            print("⚠ Demo mode - No API keys detected. Set GROQ_API_KEY for real AI.")
     
     return registry
