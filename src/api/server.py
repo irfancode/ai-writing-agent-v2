@@ -224,9 +224,6 @@ async def write_stream(request: WriteRequest):
         async for chunk in orchestrator.stream_write(
             prompt=request.prompt,
             style=style_map.get(request.style, WritingStyle.NARRATIVE),
-            task=request.task,
-            context=request.context,
-            model=request.model,
         ):
             yield f"data: {json.dumps({'content': chunk})}\n\n"
         yield "data: [DONE]\n\n"
