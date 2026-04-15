@@ -319,7 +319,8 @@ async def main():
         from ..core.output_formatter import OutputFormat
         format_enum = OutputFormat(args.format)
         formatted_prompt = OutputFormatter.format_prompt(args.prompt, format_enum)
-        await cli.write(formatted_prompt, args.style)
+        style = getattr(args, 'style', 'narrative')
+        await cli.write(formatted_prompt, style)
     elif args.command == "quality":
         scorer = QualityScorer()
         score = scorer.score(args.text, args.seo)
