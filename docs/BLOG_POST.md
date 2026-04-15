@@ -47,8 +47,6 @@ I built [AI Writing Agent](https://github.com/irfancode/ai-writing-agent-v2 beca
 
 ## What's New in v2.0
 
-## What's New in v2.0
-
 The biggest update since launch brings features that teams actually pay for:
 
 ### 🎯 Brand Voice DNA
@@ -97,11 +95,29 @@ Real-time provider monitoring - always know which AI backend is working.
 
 Short answer: **Yes. Beautifully.**
 
-Here's a live example. I asked it to write a blog post about remote work:
+Here's a live example. I asked it to write a haiku about AI:
 
-> "In the post-pandemic era, remote work has evolved from a temporary solution to a permanent fixture in the modern workplace. Studies show that remote workers are often more productive than their office-bound counterparts..."
+```
+Silicon mind awakes
+Whispers secrets to the void
+Future's gentle hum
+```
 
-**Time to generate:** 1.8 seconds  
+**Time to generate:** ~500ms  
+**Cost:** $0.00
+
+And a LinkedIn post format:
+
+```
+Embracing the Future of Work: Our Journey to Revolutionize Talent Acquisition
+
+As I sit here, reflecting on our company's journey so far, I'm reminded 
+of a pivotal moment that changed everything...
+
+[Full professional post with hooks, story, and CTA]
+```
+
+**Time to generate:** ~2 seconds  
 **Cost:** $0.00  
 **Quality:** Publication-ready
 

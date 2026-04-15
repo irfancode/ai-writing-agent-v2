@@ -221,6 +221,21 @@ ollama pull llama3.2:1b
 ./run.sh think "Plan a blog post"
 ./run.sh interactive
 
+# Format Presets
+./run.sh format "Launching our new AI product" --format linkedin_post
+
+# Quality Scoring
+./run.sh quality "Your content here..." --seo
+
+# Version History
+./run.sh version save --doc article --content "My content"
+
+# Health Check
+./run.sh health
+
+# Template Library
+./run.sh template list
+
 # Launch GUI (Desktop App)
 ./run.sh gui
 
@@ -233,6 +248,65 @@ ollama pull llama3.2:1b
 
 # API Server only
 ./run.sh server
+```
+
+### Real Output Examples
+
+**Haiku Generation:**
+```bash
+./run.sh write "Write a haiku about AI"
+```
+Output:
+```
+Silicon mind awakes
+Whispers secrets to the void
+Future's gentle hum
+```
+
+**LinkedIn Post Format:**
+```bash
+./run.sh format "Launching our new AI product" --format linkedin_post
+```
+Output:
+```
+Embracing the Future of Work: Our Journey to Revolutionize Talent Acquisition
+
+As I sit here, reflecting on our company's journey so far, I'm reminded 
+of a pivotal moment that changed everything...
+
+[Full professional post with hooks, story, CTA, and hashtags]
+```
+
+**Quality Scoring:**
+```bash
+./run.sh quality "Your content..." --seo
+```
+Output:
+```
+✗ Quality Grade: NEEDS_IMPROVEMENT
+
+📊 Overall Score: 39/100
+
+Breakdown:
+  • Readability: 45/100
+  • Engagement: 50/100
+  • SEO: 20/100
+
+💡 Suggestions:
+  • Simplify sentences - aim for 15-20 words average
+  • Use shorter, common words where possible
+```
+
+**Health Check:**
+```bash
+./run.sh health
+```
+Output:
+```
+🟢 Provider Status:
+  🟢 ollama: healthy (1ms)
+
+✓ Best provider: ollama
 ```
 
 ### What Happens If No Ollama?

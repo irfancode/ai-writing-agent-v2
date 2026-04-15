@@ -21,42 +21,37 @@
 
 **Command:**
 ```bash
-python -m src.cli.main write "Write a haiku about artificial intelligence"
+./run.sh write "Write a haiku about artificial intelligence"
 ```
 
 **Output:**
 ```
-==============================================================
-                    Generated Content
-==============================================================
-
-Silicon dreams bloom,
-Neural networks wake to thought,
-Machines learn to dream.
-
-==============================================================
+Silicon mind awakes
+Whispers secrets to the void
+Future's gentle hum
 ```
 
 ---
 
-### Example 2: Blog Post
+### Example 2: LinkedIn Post
 
 **Command:**
 ```bash
-python -m src.cli.main write "Write a blog post about the benefits of remote work"
+./run.sh format "Launching our new AI product" --format linkedin_post
 ```
 
 **Output:**
 ```
-==============================================================
-                    Generated Content
-==============================================================
+Embracing the Future of Work: Our Journey to Revolutionize Talent Acquisition
 
-# The Future of Work: Why Remote is Here to Stay
+As I sit here, reflecting on our company's journey so far, I'm reminded 
+of a pivotal moment that changed everything. It was the day we realized 
+that traditional talent acquisition methods were no longer cutting it...
 
-In the post-pandemic era, remote work has evolved from a temporary 
-solution to a permanent fixture in the modern workplace. Here's why 
-businesses and employees are embracing the distributed workforce...
+[Full post with professional tone, CTA, and hashtags]
+```
+
+---
 
 ## Key Benefits of Remote Work
 
